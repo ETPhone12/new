@@ -1,0 +1,6 @@
+{
+  "name": "Strength Buddy",
+  "description": "An adaptive strength-training app that generates personalized programs, tracks progress, and provides feedback to help you get stronger.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}

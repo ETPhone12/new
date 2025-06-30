@@ -1,0 +1,29 @@
+{
+  "name": "strength-buddy",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"components/**/*.{ts,tsx}\""
+  },
+  "dependencies": {
+    "react-dom": "^18.2.0",
+    "react": "^18.2.0",
+    "lucide-react": "^0.378.0",
+    "recharts": "^2.12.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "typescript": "~5.7.2",
+    "vite": "^6.2.0",
+    "@types/react": "^18.3.2",
+    "@types/react-dom": "^18.3.2",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/parser": "^7.11.0",
+    "@typescript-eslint/eslint-plugin": "^7.11.0"
+  }
+}
