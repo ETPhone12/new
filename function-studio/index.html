@@ -800,6 +800,77 @@ table.ref th { font-size: 12.5px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before { transition: none !important; } }
 
+/* ===================== v7: phone scratchpad, answering from the pad, explanations ===================== */
+/* on a phone the pad is solid (the page behind it no longer shows through), and the question on it is large,
+   full-contrast and centred, with its graph or figure, so it can be read while working */
+@media (max-width: 859px) {
+  .padwrap { background: var(--card); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .padq { display: block; flex: 0 0 auto; max-height: 34vh; overflow-y: auto; overscroll-behavior: contain; padding: 14px 18px 16px; border-bottom: 1px solid var(--line);
+    background: var(--card); color: var(--ink); font-size: clamp(19px, 5.4vw, 24px); line-height: 1.5; font-weight: 550; text-align: center; text-wrap: balance; }
+  .padq .m { font-size: 1.08em; }
+  .padfig { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 8px; font-size: 16px; font-weight: 400; }
+  .padfig svg { width: auto; max-width: 100%; height: auto; max-height: 170px; }
+  .padfig .qfig { margin: 0; }
+  .canvasbox { min-height: 150px; }
+}
+/* scrolling the page: a bar on the right edge to drag, and a tip the first few times the pad opens */
+.padrail { position: absolute; top: 4px; bottom: 4px; right: 1px; width: 24px; pointer-events: none; z-index: 2; }
+.padthumb { position: absolute; left: 0; right: 0; top: 0; height: 44px; display: flex; justify-content: center; pointer-events: auto; touch-action: none; cursor: grab; }
+.padthumb::before { content: ""; width: 6px; height: 100%; border-radius: 3px; background: color-mix(in srgb, var(--muted) 50%, transparent); transition: background-color .12s, width .12s; }
+.padthumb:hover::before, .padthumb.drag::before { width: 8px; background: var(--accent); }
+.padthumb.drag { cursor: grabbing; }
+.padtip { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 3; width: max-content; max-width: calc(100% - 56px); pointer-events: none; background: var(--ink); color: var(--card);
+  border-radius: 999px; padding: 8px 14px; font-size: 13.5px; font-weight: 650; text-align: center; box-shadow: var(--shadow-lift); }
+.padtip[hidden] { display: none; }
+/* bottom bar: Exit, Pick answer, Type answer */
+.padfoot { display: none; flex: 0 0 auto; gap: 8px; padding: 8px 10px; border-top: 1px solid var(--line); background: var(--card-2); }
+.padfoot .btn { flex: 1 1 0; min-width: 0; min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 6px 10px; font-size: 15.5px; white-space: nowrap; }
+.padfoot .btn svg { width: 19px; height: 19px; flex: 0 0 auto; }
+.padfoot .pfx { flex: 0 0 auto; }
+.padfoot .btn[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+@media (max-width: 859px) { .padfoot { display: flex; } }
+@media (max-width: 370px) { .padfoot { gap: 6px; padding: 8px; } .padfoot .btn { font-size: 14px; padding: 6px 8px; gap: 5px; } .padfoot .btn svg { width: 16px; height: 16px; } }
+/* the answer drawer: it sits under the page, so the working stays in view above it */
+.padans { flex: 0 0 auto; max-height: 56%; overflow-y: auto; overscroll-behavior: contain; display: grid; gap: 8px; align-content: start; padding: 8px 12px 10px;
+  border-top: 2px solid var(--accent); background: var(--card); box-shadow: 0 -10px 24px rgba(0, 0, 0, .14); }
+.padans[hidden] { display: none; }
+.pahd { display: flex; align-items: center; gap: 10px; }
+.pahd b { flex: 1; font-family: var(--f-display); font-stretch: var(--wide); font-weight: 800; font-size: 16px; }
+.padans .opts { gap: 6px; }
+.padans .opt { min-height: 44px; padding: 6px 12px; }
+.padans .fb { padding: 10px 12px; gap: 4px; font-size: 15px; }
+.padans .xbtn { min-height: 50px; padding: 8px 12px; }
+.padans .panext { width: 100%; min-height: 48px; }
+.pmrow { display: flex; gap: 8px; }
+.pmrow input { flex: 1; min-width: 0; min-height: 48px; padding: 6px 12px; font-family: var(--f-math); font-size: 19px; border: 1.5px solid var(--line); border-radius: var(--r-sm); background: var(--card); color: var(--ink); }
+.pmrow .btn { min-width: 88px; }
+.padans .keypad .kp { min-width: 44px; height: 42px; }
+.pmtip { display: block; margin-top: 8px; font-size: 12.5px; line-height: 1.4; }
+@media (min-width: 860px) { .padfoot, .padans { display: none !important; } }
+/* Explain why: after a wrong answer, at the bottom of the question and in the drawer */
+.xbtn { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 58px; padding: 10px 14px; text-align: left; background: var(--hi); color: var(--hi-ink); border-color: color-mix(in srgb, var(--hi-ink) 20%, var(--hi)); }
+.btn.xbtn:hover:not(:disabled) { border-color: var(--hi-ink); }
+.xbtn svg { width: 24px; height: 24px; flex: 0 0 auto; }
+.xbtn .xl { flex: 1; min-width: 0; display: grid; gap: 1px; }
+.xbtn .xl b { font-family: var(--f-display); font-stretch: var(--wide); font-weight: 800; font-size: 16.5px; }
+.xbtn .xl small { color: inherit; opacity: .82; font-size: 13px; font-weight: 600; }
+.xbtn .xa { font-size: 26px; line-height: 1; font-weight: 400; }
+.xpl { display: grid; gap: 16px; min-width: 0; }
+.xsec { display: grid; gap: 8px; min-width: 0; }
+.xsec h3 { font-size: 13.5px; font-weight: 750; font-stretch: 100%; letter-spacing: 0; color: var(--muted); }
+.xsec > p { font-size: 16px; line-height: 1.55; }
+.xsec .qp { font-size: 18px; }
+.xopt { display: flex; gap: 10px; align-items: center; min-width: 0; border: 1.5px solid var(--line); border-radius: 10px; padding: 9px 12px; }
+.xopt .key { flex: 0 0 auto; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 6px; background: var(--card-2); box-shadow: inset 0 0 0 1px var(--line); font-family: var(--f-display); font-weight: 800; font-size: 13px; color: var(--muted); }
+.xopt .txt { min-width: 0; overflow-wrap: anywhere; font-size: 17px; }
+.xopt.ok { border-color: var(--ok); background: var(--ok-bg); }
+.xopt.bad { border-color: var(--bad); background: var(--bad-bg); }
+.xopt.ok .key { background: var(--ok); color: var(--card); box-shadow: none; }
+.xopt.bad .key { background: var(--bad); color: var(--card); box-shadow: none; }
+.xopt + p { padding-left: 4px; }
+.xpl .steps { font-size: 17px; gap: 6px; }
+.xai-t { white-space: pre-wrap; }
+
 </style>
 <header id="top" class="top"></header>
 <main id="view" aria-live="polite"></main>
@@ -11597,7 +11668,7 @@ function pickTyped(sid, t) {
 function findItem(src) { if (src.typed) return (TYPED[src.sid] || []).find(g => g.k === src.k); const s = SEC(src.sid), tier = s && s.tiers[src.t - 1]; return tier ? tier.bank.find(b => b.k === src.k) : undefined; }
 const genSrc = src => { const it = findItem(src); return it ? (src.typed ? genTyped(it) : genFrom(it)) : null; };
 function startQuestion(q, src, label, pageId) {
-  Object.assign(UI, { q, src, label, tries: 0, done: false, hint: 0, steps: false, assisted: false, hl: false, studyMissed: false, studyExpanded: false, studyTab: 'lessons', lastKey: src ? src.k : null, tv: [], terr: '', lastWhy: '', shownAt: Date.now() });
+  Object.assign(UI, { q, src, label, tries: 0, done: false, hint: 0, steps: false, assisted: false, hl: false, studyMissed: false, studyExpanded: false, studyTab: 'lessons', lastKey: src ? src.k : null, tv: [], terr: '', lastWhy: '', shownAt: Date.now(), ans: null, pmText: '', pmErr: '', typedMiss: [], xai: '', xbusy: false });
   const len = q ? strip(q.p).length : 0;
   UI.unlockAt = q && !q.typed && len > 120 ? Date.now() + Math.min(5000, 1000 * Math.round(len / 55)) : 0;
   UI.page = { id: pageId || newPageId(), fresh: !pageId, kind: 'q', sid: src ? src.sid : UI.sid, text: q ? strip(q.p) : '', src: src || null, seed: q && Number.isInteger(q.seed) ? q.seed : null };
@@ -11676,6 +11747,7 @@ function grade(ok, why, meta) {
   pullStore(); // count on top of anything another tab recorded since this tab last looked
   if (UI.tries === 0 && UI.view !== 'review') forgetQuestion();
   UI.tries++; if (!ok) UI.studyMissed = true; const first = UI.tries === 1; UI.msg = ''; UI.lastWhy = ok ? '' : why;
+  if (!ok && UI.q && UI.q.typed) UI.typedMiss = [...(UI.typedMiss || []), { v: UI.tv.slice(), why }]; // Explain why shows each wrong typed answer
   if (UI.view === 'review') {
     const key = UI.rev.keys[UI.rev.i], r = ST.rev[key];
     /* only a first-try answer with no hints or worked steps, given once the question is due, moves it to the next gap
@@ -11738,9 +11810,9 @@ function answer(i) {
   if (Date.now() < UI.unlockAt && UI.tries === 0) return;
   o.picked = true; grade(o.ok, o.why, o.meta);
 }
-function submitTyped() {
+function submitTyped(pre = '') {
   const q = UI.q; if (!q || !q.typed || UI.done) return;
-  const raw = q.typed.fields.map((f, i) => { const el = document.getElementById('tf' + i); return el ? el.value : ''; });
+  const raw = q.typed.fields.map((f, i) => { const el = document.getElementById(pre + 'tf' + i); return el ? el.value : ''; });
   UI.tv = raw;
   const r = checkTyped(q, raw);
   if (r.err) { UI.terr = r.err; return UI.view === 'review' ? renderReviewCol() : renderPracticeCol(); }
@@ -11935,32 +12007,42 @@ const POLYPAD = [['−', '-'], ['+', '+'], ['( )', '()'], ['^', '^'], ['²', '^2
 const KEYPAD = [['−', '-'], ['/', '/'], ['( )', '()'], ['x', 'x'], ['x²', '^2'], ['√( )', '√()'], ['∛( )', '∛()'], ['| |', '||'], ['.', '.']];
 // an exact value is a number written with fractions and roots, so it gets the root keys but no x
 const EXACTPAD = [['−', '-'], ['/', '/'], ['( )', '()'], ['√( )', '√()'], ['∛( )', '∛()'], ['²', '^2'], ['.', '.']];
-function cardHtml(q, meta) {
-  const keys = 'ABCD';
-  const locked = !q.typed && !UI.done && UI.tries === 0 && Date.now() < UI.unlockAt;
-  let fb = '', body = '';
-  if (q.typed) {
-    const F0 = q.typed.fields, hasExpr = F0.some(f => f.kind === 'expr'), hasExact = F0.some(f => f.kind === 'exact'), polyF = F0.find(f => ['poly', 'rnum', 'rden'].includes(f.kind));
-    body = `<form class="typed" id="tform" autocomplete="off"><div class="tfields">${F0.map((f, i) => {
+// the typed answer form; pre names its copy: '' in the question card, 'p' in the drawer under the phone scratchpad
+function typedFormHtml(q, pre = '') {
+  const F0 = q.typed.fields, hasExpr = F0.some(f => f.kind === 'expr'), hasExact = F0.some(f => f.kind === 'exact'), polyF = F0.find(f => ['poly', 'rnum', 'rden'].includes(f.kind));
+  return `<form class="typed" id="${pre}tform" autocomplete="off"><div class="tfields">${F0.map((f, i) => {
       const v = esc(UI.tv[i] || '');
-      if (f.kind === 'sel') return `<label class="tf sel"><span class="m">${f.pre}</span><select id="tf${i}" ${UI.done ? 'disabled' : ''}>${f.opts.map(o => `<option ${UI.tv[i] === o ? 'selected' : ''}>${o}</option>`).join('')}</select><span class="m">${f.post}</span></label>`;
-      return `<label class="tf ${f.kind}"><span class="m">${f.pre}</span><input id="tf${i}" data-tf="${i}" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" value="${v}" ${UI.done ? 'disabled' : ''} aria-label="Answer box ${i + 1}${f.kind === 'exact' ? ': an exact value, written like 3√5/4 or 3sqrt(5)/4' : ''}"${f.kind === 'exact' ? ' placeholder="3√5/4"' : ''}><span class="m">${f.post}</span></label>`;
+      if (f.kind === 'sel') return `<label class="tf sel"><span class="m">${f.pre}</span><select id="${pre}tf${i}" data-tf="${i}" ${UI.done ? 'disabled' : ''}>${f.opts.map(o => `<option ${UI.tv[i] === o ? 'selected' : ''}>${o}</option>`).join('')}</select><span class="m">${f.post}</span></label>`;
+      return `<label class="tf ${f.kind}"><span class="m">${f.pre}</span><input id="${pre}tf${i}" data-tf="${i}" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" value="${v}" ${UI.done ? 'disabled' : ''} aria-label="Answer box ${i + 1}${f.kind === 'exact' ? ': an exact value, written like 3√5/4 or 3sqrt(5)/4' : ''}"${f.kind === 'exact' ? ' placeholder="3√5/4"' : ''}><span class="m">${f.post}</span></label>`;
     }).join('')}</div>
       ${UI.done ? '' : `<div class="keypad" aria-label="Insert symbols">${(polyF ? [...POLYPAD, ...(polyF.vars || ['x']).map(v => [v, v])] : hasExpr ? KEYPAD : hasExact ? EXACTPAD : KEYPAD.filter(k => ['-', '/', '.'].includes(k[1]))).map(([l, v]) => `<button type="button" class="kp" data-ins="${esc(v)}">${l}</button>`).join('')}<button type="submit" class="btn primary">Check</button></div>`}
       ${UI.terr ? `<div class="terr" role="alert">${UI.terr}</div>` : ''}</form>`;
+}
+// what the last answer got: right, or why not
+function fbHtml(q) {
+  if (q.typed) {
     const ans = showTyped(q);
-    if (UI.done && !UI.lastWhy) fb = `<div class="fb ok" role="status"><b class="h">${UI.tries === 1 ? 'Correct.' : 'Got it on the second try.'}</b></div>`;
-    else if (UI.done) fb = `<div class="fb bad" role="status"><b class="h">Not quite.</b><span>${UI.lastWhy}</span><span>The answer is <b class="m">${ans}</b>.</span></div>`;
-    else if (UI.lastWhy) fb = `<div class="fb bad" role="status"><b class="h">Not quite. Here’s why:</b><span>${UI.lastWhy}</span><span><small>Fix your answer and check again, or show the solution.</small></span></div>`;
-  } else {
-    const lastWrong = [...q.opts].reverse().find(o => o.picked && !o.ok), rightOpt = q.opts.find(o => o.ok);
-    if (UI.done && rightOpt.picked && UI.tries === 1) fb = `<div class="fb ok" role="status"><b class="h">Correct.</b>${rightOpt.why ? `<span>${rightOpt.why}</span>` : ''}</div>`;
-    else if (UI.done && rightOpt.picked) fb = `<div class="fb ok" role="status"><b class="h">Got it on the second try.</b><span>${lastWrong ? 'Earlier: ' + lastWrong.why : ''}</span></div>`;
-    else if (UI.done) fb = `<div class="fb bad" role="status"><b class="h">Not quite.</b><span>${lastWrong ? lastWrong.why : ''}</span><span>The answer is ${q.grid ? 'marked with ✓ above' : `<b>${rightOpt.t}</b>`}.</span></div>`;
-    else if (lastWrong) fb = `<div class="fb bad" role="status"><b class="h">Not quite. Here’s why:</b><span>${lastWrong.why}</span><span><small>Try again, or show the solution.</small></span></div>`;
-    body = `${locked ? `<div class="lock" role="status">Read the whole question first. Answers unlock in <b id="lockcd">${Math.ceil((UI.unlockAt - Date.now()) / 1000)}</b> s.</div>` : ''}
-      <div class="opts${q.grid ? ' grid2' : ''}">${q.opts.map((o, i) => { const cls = o.picked ? (o.ok ? 'ok' : 'bad') : UI.done && o.ok ? 'ok' : UI.done ? 'dim' : ''; return `<button class="opt ${cls}" data-act="ans" data-i="${i}" ${UI.done || o.picked || locked ? 'disabled' : ''}><span class="key">${keys[i]}</span><span class="txt">${o.t}</span><span>${o.picked ? (o.ok ? '✓' : '✗') : UI.done && o.ok ? '✓' : ''}</span></button>`; }).join('')}</div>`;
+    if (UI.done && !UI.lastWhy) return `<div class="fb ok" role="status"><b class="h">${UI.tries === 1 ? 'Correct.' : 'Got it on the second try.'}</b></div>`;
+    if (UI.done) return `<div class="fb bad" role="status"><b class="h">Not quite.</b><span>${UI.lastWhy}</span><span>The answer is <b class="m">${ans}</b>.</span></div>`;
+    if (UI.lastWhy) return `<div class="fb bad" role="status"><b class="h">Not quite. Here’s why:</b><span>${UI.lastWhy}</span><span><small>Fix your answer and check again, or show the solution.</small></span></div>`;
+    return '';
   }
+  const lastWrong = [...q.opts].reverse().find(o => o.picked && !o.ok), rightOpt = q.opts.find(o => o.ok);
+  if (UI.done && rightOpt.picked && UI.tries === 1) return `<div class="fb ok" role="status"><b class="h">Correct.</b>${rightOpt.why ? `<span>${rightOpt.why}</span>` : ''}</div>`;
+  if (UI.done && rightOpt.picked) return `<div class="fb ok" role="status"><b class="h">Got it on the second try.</b><span>${lastWrong ? 'Earlier: ' + lastWrong.why : ''}</span></div>`;
+  if (UI.done) return `<div class="fb bad" role="status"><b class="h">Not quite.</b><span>${lastWrong ? lastWrong.why : ''}</span><span>The answer is ${q.grid ? 'marked with ✓ above' : `<b>${rightOpt.t}</b>`}.</span></div>`;
+  if (lastWrong) return `<div class="fb bad" role="status"><b class="h">Not quite. Here’s why:</b><span>${lastWrong.why}</span><span><small>Try again, or show the solution.</small></span></div>`;
+  return '';
+}
+function optsHtml(q, locked) {
+  const keys = 'ABCD';
+  return `<div class="opts${q.grid ? ' grid2' : ''}">${q.opts.map((o, i) => { const cls = o.picked ? (o.ok ? 'ok' : 'bad') : UI.done && o.ok ? 'ok' : UI.done ? 'dim' : ''; return `<button class="opt ${cls}" data-act="ans" data-i="${i}" ${UI.done || o.picked || locked ? 'disabled' : ''}><span class="key">${keys[i]}</span><span class="txt">${o.t}</span><span>${o.picked ? (o.ok ? '✓' : '✗') : UI.done && o.ok ? '✓' : ''}</span></button>`; }).join('')}</div>`;
+}
+const lockHtml = () => `<div class="lock" role="status">Read the whole question first. Answers unlock in <b class="lockcd">${Math.ceil((UI.unlockAt - Date.now()) / 1000)}</b> s.</div>`;
+function cardHtml(q, meta) {
+  const locked = !q.typed && !UI.done && UI.tries === 0 && Date.now() < UI.unlockAt;
+  const body = q.typed ? typedFormHtml(q) : `${locked ? lockHtml() : ''}
+      ${optsHtml(q, locked)}`, fb = fbHtml(q);
   const refSec = SEC(UI.src ? UI.src.sid : UI.sid);
   const hintLv = [q.hint, q.ref || refSec.ref, q.steps.length ? 'First step: ' + q.steps[0] : ''].filter(Boolean);
   const hintsHtml = UI.hint ? `<div class="hints">${hintLv.slice(0, UI.hint).map((h, i) => `<div class="hint"><b>${['Hint', 'Textbook', 'Worked step'][i]}</b>${h}</div>`).join('')}</div>` : '';
@@ -11971,7 +12053,7 @@ function cardHtml(q, meta) {
       <div class="qmeta">${meta}<button class="btn small padbtn" data-act="pad">✎ Scratchpad</button></div>
       <div class="qp">${q.p}</div>${g}${ex}
       ${q.hl ? `<div class="row2"><button class="btn small hlbtn" data-act="hl" aria-pressed="${UI.hl}">${UI.hl ? 'Hide' : 'Highlight'} inside / outside</button>${UI.hl ? '<span class="legend"><span><i style="background:var(--in-bg);outline:2px solid var(--in)"></i>inside → horizontal (x)</span><span><i style="background:var(--out-bg);outline:2px solid var(--out)"></i>outside → vertical (y)</span></span>' : ''}</div>` : ''}
-      ${body}${fb}${hintsHtml}${stepsHtml}${studyNextHtml(q)}
+      ${body}${fb}${hintsHtml}${stepsHtml}${studyNextHtml(q)}${xBtnHtml()}
       <div class="ctrl"><button class="btn" data-act="hint" ${UI.hint >= hintLv.length || UI.done ? 'disabled' : ''}>Hint ${UI.hint}/${hintLv.length}</button>
         <button class="btn" data-act="steps" ${UI.steps ? 'disabled' : ''}>Show solution</button><span class="spacer"></span>
         <button class="btn ${UI.done ? 'primary' : ''}" data-act="next">${UI.done ? 'Next →' : 'Skip →'}</button></div>
@@ -11982,10 +12064,184 @@ function armLock(rerender) {
   clearInterval(lockTimer);
   if (!UI.q || UI.q.typed || UI.done || UI.tries || Date.now() >= UI.unlockAt) return;
   lockTimer = setInterval(() => {
-    const left = Math.ceil((UI.unlockAt - Date.now()) / 1000), el = $('#lockcd');
-    if (left <= 0 || !el) { clearInterval(lockTimer); if (el) rerender(); return; }
-    el.textContent = left;
+    const left = Math.ceil((UI.unlockAt - Date.now()) / 1000), els = document.querySelectorAll('.lockcd');
+    if (left <= 0 || !els.length) { clearInterval(lockTimer); if (els.length) rerender(); return; }
+    els.forEach(el => { el.textContent = left; });
   }, 250);
+}
+
+/* ---------- answering from the scratchpad (phones) ----------
+   On a phone the pad covers the screen, so its bottom bar has Exit, Pick answer and Type answer. Pick and Type open a
+   drawer under the page with the choices, or a box to type the answer in, and the working stays in view above it.
+   A typed answer to a multiple-choice question is matched to the choice it is written as (a set in any order, a number
+   in any form, x = 2 or just 2). One that matches no choice isn't marked, so a slip in how it's written costs nothing. */
+const BULB = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2h5c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg>';
+function xBtnHtml() {
+  if (!UI.studyMissed) return '';
+  return `<button type="button" class="btn xbtn" data-act="explain" aria-haspopup="dialog">${BULB}<span class="xl"><b>Explain why</b><small>${UI.done || UI.steps ? 'See what went wrong, step by step' : 'See why that answer isn’t right'}</small></span><span class="xa" aria-hidden="true">›</span></button>`;
+}
+// the question at the top of the phone pad, with its graph or figure
+function padQ(q) { const pq = $('#padq'); if (pq) pq.innerHTML = q.p + (q.graph || q.extra ? `<div class="padfig">${q.graph ? plot(q.graph) : ''}${q.extra || ''}</div>` : ''); }
+// an answer written the same way whatever the spacing, minus sign or symbol spelling: "(-inf, 2]" and "(−∞, 2]" agree
+// powers come out as ^(…) however they were written: x², x^2, x^(2) and x<sup>2</sup> agree
+const ansKey = s => strip(String(s).replace(/<sup>(.*?)<\/sup>/g, '^($1)'))
+  .replace(/&nbsp;| /g, ' ').replace(/&minus;/g, '-').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
+  .replace(/\s+in\s+/gi, '∈').replace(/[−–—]/g, '-').replace(/[×·∙]/g, '*')
+  .replace(/(⁻?)([⁰¹²³⁴⁵⁶⁷⁸⁹]+)/g, (m, n, d) => '^(' + (n ? '-' : '') + [...d].map(c => FK_SUP[c]).join('') + ')')
+  .replace(/\s+/g, '').toLowerCase()
+  .replace(/<=|=</g, '≤').replace(/>=|=>/g, '≥').replace(/infinity|inf/g, '∞').replace(/sqrt/g, '√')
+  .replace(/∈r(?![a-z])/g, '∈ℝ').replace(/([\])])u([[(])/g, '$1∪$2')
+  .replace(/\/\((-?[\w.√∞]+)\)/g, '/$1').replace(/(^|[^\w)^])\((-?[\w.√∞]+)\)\//g, '$1$2/')
+  .replace(/\^(-?(?:\d+(?:\.\d+)?π?|[a-zπ]))/g, '^($1)');
+const ansNum = s => { const m = /^(-?\d*\.?\d+)(?:\/(-?\d*\.?\d+))?$/.exec(s); if (!m) return null; const v = m[2] !== undefined ? +m[1] / +m[2] : +m[1]; return isFinite(v) ? v : null; };
+// the parts of a list, split at commas that aren't inside brackets
+function topSplit(s) { const out = []; let d = 0, cur = ''; for (const c of s) { if ('([{'.includes(c)) d++; else if (')]}'.includes(c)) d--; if (c === ',' && !d) { out.push(cur); cur = ''; } else cur += c; } out.push(cur); return out; }
+function ansSame(a, b) {
+  if (a === b) return true;
+  const na = ansNum(a), nb = ansNum(b); if (na !== null && nb !== null) return Math.abs(na - nb) < 1e-9;
+  // a set: the same elements in any order (a repeat still counts, so {2, 2, 5} isn't {2, 5})
+  const el = x => { const n = ansNum(x); return n === null ? 's' + x : 'n' + Math.round(n * 1e9) / 1e9; };
+  const set = s => (/^\{.*\}$/.test(s) && !/[|:∈]/.test(s) ? topSplit(s.slice(1, -1)).filter(Boolean).map(el).sort() : null);
+  const sa = set(a), sb = set(b); if (sa && sb) return sa.length === sb.length && sa.every((x, i) => x === sb[i]);
+  // "x = 2" and "2"
+  const rhs = s => { const m = /^[a-z](?:\([a-z]\))?=(.+)$/.exec(s); return m ? m[1] : null; };
+  const ra = rhs(a), rb = rhs(b);
+  if (ra !== null && rb === null) return ansSame(ra, b);
+  if (rb !== null && ra === null) return ansSame(a, rb);
+  return false;
+}
+// a format hint shaped like the choices (the same for every choice, so it gives nothing away)
+function ansExample(q) {
+  const s = ansKey(q.opts[0].t);
+  if (/^\{.*[|:∈]/.test(s)) return '{x ∈ ℝ | x ≥ 2}';
+  if (/^\{/.test(s)) return '{1, 2, 3}';
+  if (/^[[(].*,.*[\])]$/.test(s) && /∞|[[\]]/.test(s)) return '[−2, 5)';
+  if (/^\(.*,.*\)$/.test(s)) return '(2, −3)';
+  if (/^y=/.test(s)) return 'y = 2x + 3';
+  if (/^[a-z]\([a-z]\)=/.test(s)) return 'f(x) = 2x + 3';
+  return '';
+}
+// which choice a typed answer is: { i } or { err }
+function matchOpt(q, raw) {
+  const k = ansKey(String(raw).replace(/</g, '&lt;').replace(/>/g, '&gt;')); // what's typed is text, so a < is never a tag if (!k) return { err: 'Type your answer first.' };
+  const keys = q.opts.map(o => ansKey(o.t));
+  let hit = keys.flatMap((x, i) => (x === k ? [i] : []));
+  if (!hit.length) { const f = formKey(raw); hit = keys.flatMap((x, i) => (ansSame(k, x) || (f && f === formKey(q.opts[i].t)) ? [i] : [])); }
+  if (hit.length === 1) return { i: hit[0] };
+  if (hit.length > 1) return { err: 'That could be more than one of the choices. Write it out exactly, or tap Pick answer.' };
+  if (/^[a-d]$/.test(k)) return { err: 'Type the answer itself, not its letter. To choose by letter, tap Pick answer.' };
+  const ex = ansExample(q);
+  return { err: `That doesn’t match any of the choices. Check what you typed${ex ? `, and write it like <span class="m">${ex}</span>` : ''}, or tap Pick answer.` };
+}
+// choices written as graphs or in words can't sensibly be typed
+function typeableMC(q) {
+  return !q.typed && !q.grid && q.opts.every(o => !/<(svg|table|img|canvas)/i.test(o.t) && ansKey(o.t).length <= 60 && (strip(o.t).match(/[a-z]{3,}/gi) || []).filter(w => !/^(inf|infinity|sqrt|undefined|none)$/i.test(w)).length < 2);
+}
+// symbol keys for typing a choice: only the symbols the choices use (all four of them, so this gives nothing away)
+const MCKEYS = [['−', '-'], ['/', '/'], ['√', '√'], ['{ }', '{}'], ['[', '['], [']', ']'], ['(', '('], [')', ')'], [',', ','], ['∞', '∞'], ['≤', '≤'], ['≥', '≥'], ['<', '<'], ['>', '>'], ['∈', '∈'], ['ℝ', 'ℝ'], ['|', '|'], ['∪', '∪'], ['x', 'x'], ['^', '^'], ['=', '=']];
+function mcKeys(q) { const all = q.opts.map(o => ansKey(o.t)).join(' '); return MCKEYS.filter(([, v]) => v === '-' || [...v].some(c => all.includes(c))).map(([l, v]) => `<button type="button" class="kp" data-ins="${esc(v)}">${l}</button>`).join(''); }
+function padAnsHtml() {
+  const q = UI.q, tab = UI.ans, locked = !q.typed && !UI.done && UI.tries === 0 && Date.now() < UI.unlockAt;
+  const head = t => `<div class="pahd"><b>${t}</b><button type="button" class="btn small" data-act="padans" data-v="">Hide ▾</button></div>`;
+  const go = (v, t) => `<button type="button" class="btn primary" data-act="padans" data-v="${v}">${t}</button>`;
+  const after = `${fbHtml(q)}${xBtnHtml()}${UI.done ? '<button type="button" class="btn primary panext" data-act="next">Next question →</button>' : ''}`;
+  if (tab === 'pick') {
+    if (q.typed) return `${head('Pick an answer')}<p class="wb">This question has no choices to pick from: you type its answer.</p>${go('type', 'Type answer')}`;
+    return `${head(UI.done ? 'Your answer' : 'Pick an answer')}${locked ? lockHtml() : ''}${optsHtml(q, locked)}${after}`;
+  }
+  if (q.typed) return `${head(UI.done ? 'Your answer' : 'Type your answer')}${typedFormHtml(q, 'p')}${after}`;
+  if (!typeableMC(q)) return `${head('Type your answer')}<p class="wb">The choices for this one are ${q.grid ? 'graphs' : 'written in words'}, so pick one instead.</p>${go('pick', 'Pick answer')}`;
+  const ex = ansExample(q);
+  const form = UI.done ? '' : `<form class="typed" id="pmform" autocomplete="off"><div class="pmrow"><input id="pmtext" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" value="${esc(UI.pmText || '')}" aria-label="Your answer"${ex ? ` placeholder="${esc(ex)}"` : ''} ${locked ? 'disabled' : ''}><button type="submit" class="btn primary" ${locked ? 'disabled' : ''}>Check</button></div>
+    <div class="keypad" aria-label="Insert symbols">${mcKeys(q)}</div>${UI.pmErr ? `<div class="terr" role="alert">${UI.pmErr}</div>` : ''}<small class="pmtip">You can type inf for ∞, &lt;= for ≤ and sqrt for √. Your answer is checked against the choices.</small></form>`;
+  return `${head(UI.done ? 'Your answer' : 'Type your answer')}${locked ? lockHtml() : ''}${form}${after}`;
+}
+// the drawer, drawn again after every answer; opening it keeps the newest writing on the page in view
+function renderPadAns() {
+  const el = $('#padans'); if (!el) return;
+  const live = !!UI.q && !(UI.view === 'review' && UI.rev && UI.rev.i >= UI.rev.keys.length);
+  if (!live) UI.ans = null;
+  document.querySelectorAll('.padfoot [data-act="padans"]').forEach(b => { b.setAttribute('aria-pressed', String(UI.ans === b.dataset.v)); b.disabled = !live; });
+  if (!UI.ans) { if (!el.hidden) { el.hidden = true; el.innerHTML = ''; Pad.resize(); } return; }
+  const opening = el.hidden; el.innerHTML = padAnsHtml(); el.hidden = false;
+  if (opening) { el.scrollTop = 0; Pad.resize(); Pad.revealLast(); }
+}
+function togglePad(open = !UI.padOpen) {
+  const p = $('#pad'), had = p && p.contains(document.activeElement);
+  UI.padOpen = open; if (!open) UI.ans = null;
+  if (p) { p.dataset.open = open; Pad.resize(); }
+  renderPadAns();
+  if (open) { Pad.tipShow(); return; }
+  syncCardInputs();
+  const b = document.querySelector('.qcard .padbtn'); if (had && b) b.focus({ preventScroll: true });
+}
+// what was typed in the drawer shows in the question card too
+function syncCardInputs() { document.querySelectorAll('#qcol .tfields [data-tf]').forEach(el => { const v = UI.tv[+el.dataset.tf]; if (v !== undefined && el.value !== v) el.value = v; }); }
+function submitPick() {
+  const q = UI.q; if (!q || q.typed || UI.done) return;
+  const el = $('#pmtext'), raw = el ? el.value : UI.pmText || ''; UI.pmText = raw;
+  if (Date.now() < UI.unlockAt && UI.tries === 0) return;
+  const r = matchOpt(q, raw);
+  if (r.err) { UI.pmErr = r.err; return renderPadAns(); }
+  if (q.opts[r.i].picked) { UI.pmErr = 'You already tried that answer. Try a different one.'; return renderPadAns(); }
+  UI.pmErr = ''; answer(r.i);
+}
+
+/* ---------- Explain why ----------
+   After a wrong answer: why that answer is wrong, then (once the question is over, or on asking) the right answer, the
+   steps to it, why each other choice is wrong, and what to remember. All of it comes with the question, so it works
+   offline; where the app can ask Claude, a button asks for an explanation of this mistake, with the scratchpad page. */
+function explainHtml() {
+  const q = UI.q; if (!q) return '<div class="xpl"><div class="hd"><h2>Explain why</h2><button class="btn small" data-act="close">Close</button></div></div>';
+  const full = UI.done || UI.steps, keys = 'ABCD';
+  const row = (o, cls) => `<div class="xopt ${cls}"><span class="key">${keys[q.opts.indexOf(o)]}</span><span class="txt">${o.t}</span></div>`;
+  const typedAs = v => q.typed.fields.map((f, i) => `${f.pre}<b>${esc(v[i] || '—')}</b>${f.post}`).join('<br>');
+  const yours = q.typed ? (UI.typedMiss || []).map(m => `<div class="xopt bad"><span class="txt m">${typedAs(m.v)}</span></div><p>${m.why}</p>`)
+    : q.opts.filter(o => o.picked && !o.ok).map(o => `${row(o, 'bad')}<p>${o.why}</p>`);
+  const right = q.typed ? `<div class="xopt ok"><span class="txt m">${showTyped(q)}</span></div>` : (o => `${row(o, 'ok')}${o.why ? `<p>${o.why}</p>` : ''}`)(q.opts.find(o => o.ok));
+  const others = q.typed ? [] : q.opts.filter(o => !o.ok && !o.picked && o.why && o.why !== GENERIC_WHY);
+  const book = q.ref || (SEC(UI.src ? UI.src.sid : UI.sid) || {}).ref;
+  const remember = [full && q.hint ? `<p>${q.hint}</p>` : '', book ? `<p><small>Textbook:</small> ${book}</p>` : ''].join('');
+  const rec = UI.src ? studyRecommendations(q, UI.src) : null, top = rec && rec.sec && rec.lessons && rec.lessons[0];
+  return `<div class="xpl"><div class="hd"><h2>${full ? 'Here’s why' : 'Why that’s not right'}</h2><button class="btn small" data-act="close">Close</button></div>
+    <section class="xsec"><h3>The question</h3><div class="qp">${q.p}</div>${q.graph ? `<div class="qfig">${plot(q.graph)}</div>` : ''}${q.extra ? `<div class="qfig wrapx">${q.extra}</div>` : ''}</section>
+    ${yours.length ? `<section class="xsec"><h3>${yours.length > 1 ? 'Your answers' : 'Your answer'}, and why ${yours.length > 1 ? 'they’re' : 'it’s'} wrong</h3>${yours.join('')}</section>` : ''}
+    ${full ? `<section class="xsec"><h3>The right answer</h3>${right}</section>
+      ${q.steps.length ? `<section class="xsec"><h3>How to get it</h3><ol class="steps">${q.steps.map(s => `<li>${s}</li>`).join('')}</ol></section>` : ''}
+      ${others.length ? `<section class="xsec"><h3>Why the other choices don’t work</h3>${others.map(o => `${row(o, '')}<p>${o.why}</p>`).join('')}</section>` : ''}`
+    : `<section class="xsec"><h3>A nudge</h3><p>${q.hint || 'Go back over each step on your scratchpad and check the signs.'}</p></section>
+      <div class="fb info"><span>You still have another try. Want the right answer and the full steps now instead?</span><div class="ctrl"><button class="btn" data-act="xreveal">Show the answer and steps</button></div></div>`}
+    ${remember ? `<section class="xsec"><h3>Remember</h3>${remember}</section>` : ''}
+    <div id="xai" aria-live="polite">${UI.xai || ''}</div>
+    <div class="ctrl">${full && SAMPLE ? `<button class="btn" data-act="xai" ${UI.xbusy ? 'disabled' : ''}>${UI.xbusy ? 'Claude is reading…' : UI.xai ? 'Ask Claude again' : 'Ask Claude to explain more'}</button>` : ''}${top ? `<button class="btn" data-act="study-lesson" data-sid="${rec.sec.id}" data-i="${top.index}">Read the lesson</button>` : ''}<span class="spacer"></span><button class="btn primary" data-act="close">${full ? 'Back to the question' : 'Try again'}</button></div></div>`;
+}
+function xaiRefresh() {
+  const el = $('#xai'); if (el) el.innerHTML = UI.xai || '';
+  const b = document.querySelector('.sheet [data-act="xai"]'); if (b) { b.disabled = !!UI.xbusy; b.textContent = UI.xbusy ? 'Claude is reading…' : 'Ask Claude again'; }
+}
+// an explanation of this particular mistake from Claude; a reply that comes after the question has changed is dropped
+async function explainAI() {
+  const q = UI.q; if (!SAMPLE || !q || UI.xbusy) return;
+  const pid = UI.page && UI.page.id, T = s => studyText(s);
+  const useImg = !!(SAMPLE_IMG && Pad.page && Pad.page.id === pid && Pad.shown().length);
+  UI.xbusy = true; UI.xai = '<div class="fb info"><b class="h">Claude is reading…</b></div>'; xaiRefresh();
+  const wrong = q.typed ? (UI.typedMiss || []).map(m => q.typed.fields.map((f, i) => `${T(f.pre)} ${m.v[i] || ''} ${T(f.post)}`.trim()).join('; '))
+    : q.opts.filter(o => o.picked && !o.ok).map(o => T(o.t));
+  const right = q.typed ? T(showTyped(q)) : T(q.opts.find(o => o.ok).t);
+  const prompt = `You are a patient tutor for Ontario Grade 11 Functions (MCR3U). A student answered this question wrong. Explain why their answer is wrong and how to reach the right one, in plain words a Grade 11 student can follow, using the numbers in the question. No LaTeX: write math in plain text with symbols like −, ≤, √ and ∞.\n\nQuestion: ${T(q.p)}\n${q.typed ? '' : `Choices: ${q.opts.map((o, i) => `${'ABCD'[i]}) ${T(o.t)}`).join('   ')}\n`}Student's answer${wrong.length > 1 ? 's' : ''}: ${wrong.join(' | ') || '(not recorded)'}\nCorrect answer: ${right}\nWorked solution: ${q.steps.map(T).join(' → ') || '(none)'}\n${useImg ? "\nThe student's handwritten scratch work is attached. If you can read it, point to the exact step where it went wrong.\n" : ''}\nReply with only JSON like {"mistake":"...","explanation":"..."} where "mistake" names the error in under 15 words and "explanation" is 3 to 6 short sentences.`;
+  let html = '';
+  try {
+    const opts = { modelTier: 'quick' }; if (useImg) opts.images = [await Pad.toBlob()];
+    const r = await SAMPLE.json(prompt, opts);
+    html = `<div class="fb info"><b class="h">Claude’s explanation</b>${r && r.mistake ? `<span><b>The mistake:</b> ${esc(String(r.mistake))}</span>` : ''}<span class="xai-t">${esc(String((r && r.explanation) || ''))}</span><small>Claude can make mistakes. Check it against the steps above.</small></div>`;
+  } catch (err) {
+    const code = err && err.code;
+    if (['not_granted', 'sampling_disabled', 'not_declared', 'capability_disabled', 'capability_removed'].includes(code)) { SAMPLE = null; html = '<div class="fb info">Claude isn’t available here. The steps above show how to get the answer.</div>'; }
+    else if (code === 'rate_limited') html = '<div class="fb info">Too many requests right now. Try again in a little while.</div>';
+    else if (code !== 'cancelled') html = '<div class="fb info">The explanation didn’t come through. Tap the button to try again.</div>';
+  }
+  if ((UI.page && UI.page.id) !== pid) return; // moved on to another question
+  UI.xbusy = false; UI.xai = html; xaiRefresh();
 }
 
 /* ---------- renderers ---------- */
@@ -12017,7 +12273,7 @@ function renderHome() {
 }
 function renderSection() {
   document.querySelectorAll('.pghost').forEach(g => g.remove()); // a drag in progress ends with the view it started in
-  const sec = SEC(UI.sid);
+  const sec = SEC(UI.sid); UI.ans = null;
   const tabs = [['learn', 'Learn'], ['explore', /^boss/.test(sec.tool) ? 'Test gate' : 'Explore'], ['practice', 'Practice'], ['explain', 'Explain it']];
   const hw = ST.hw[sec.id] && ST.hw[sec.id].v;
   $('#view').innerHTML = `<section class="shead"><div class="eyebrow"><span>Unit ${unitOf(sec)}, section ${secNo(sec)}</span><span>Workbook ${sec.wb}</span><span>Textbook ${sec.tb}</span></div><h1><span class="bignum">${unitOf(sec) > 1 ? unitOf(sec) + '.' : ''}${secNo(sec)}</span>${sec.title}</h1><p class="goal">${sec.goal}</p>
@@ -12074,7 +12330,7 @@ function practiceShell(top) {
 }
 function renderPractice(sec) {
   $('#tabbody').innerHTML = practiceShell(`<div class="modebar"><span class="wb">Answer by</span>${seg('Answer mode', [['mc', 'Tapping a choice'], ['type', 'Typing it']], UI.mode).replace('class="seg"', 'class="seg" id="modeseg"')}</div><div class="tiers" id="tiers"></div>`);
-  Pad.mount($('#pad'));
+  Pad.mount($('#pad'), true);
   if (!UI.q || UI.qsid !== sec.id || UI.qmode !== UI.mode || UI.view !== 'section') { UI.qsid = sec.id; UI.qmode = UI.mode; UI.queue = []; UI.confuse = null; UI.pending = null; UI.fast = 0; UI.wrongRun = 0; UI.msg = ''; if (!resumeQuestion(sec)) nextQuestion(); }
   else if (UI.page) Pad.use(UI.page);
   renderPracticeCol();
@@ -12099,7 +12355,7 @@ function renderPracticeCol() {
   }
   $('#qcol').innerHTML = `${UI.msg ? `<div class="toast" role="status">${UI.msg}</div>` : ''}${cardHtml(q, meta)}
     <div class="levelbar"><span>Tier ${t}: <b>${LVL[level(sec.id, t)]}</b></span><span>${sec.gates ? gateText(sec, t) + ' · ' + masteryText(sec.id, t) + (sec.gates[t - 1].type === 'tool' && !T.gm && !T.m ? ` <button class="btn small" data-act="gate" data-tool="${sec.gates[t - 1].tool}">Open it</button>` : '') : masteryText(sec.id, t)}</span>${UI.pending ? `<span>Next: Tier ${UI.pending}</span>` : ''}${UI.queue.length ? `<span>${UI.queue.length} fix-it queued</span>` : ''}</div>${narrow}`;
-  const pq = $('#padq'); if (pq) pq.innerHTML = q.p;
+  padQ(q); renderPadAns();
   armLock(renderPracticeCol);
 }
 
@@ -12110,7 +12366,7 @@ function startReview() {
   UI.view = 'review'; UI.qsid = null; UI.rev = { keys: shuffle(list), i: 0, score: 0, early: !due.length };
   closeSheet(); renderTop();
   $('#view').innerHTML = practiceShell(`<section class="shead"><div class="eyebrow">Spaced review</div><h1>Review ${UI.rev.early ? '(early)' : 'due'}</h1><p class="goal">${UI.rev.early ? 'Nothing is due yet, so this is extra practice: right answers keep each question’s schedule as it is, and a miss brings it back tomorrow.' : 'Each question is a fresh version of one you missed before. Get it right first try, with no hints, to push it further out.'}</p></section><div class="bar" id="revbar"><span></span></div>`);
-  Pad.mount($('#pad')); reviewLoad();
+  Pad.mount($('#pad'), true); reviewLoad();
 }
 function reviewLoad() {
   const r = UI.rev; if (r.i >= r.keys.length) { renderReviewDone(); return; }
@@ -12122,13 +12378,14 @@ function renderReviewCol() {
   const r = UI.rev, q = UI.q; const bar = $('#revbar span'); if (bar) bar.style.width = (r.i / r.keys.length) * 100 + '%';
   const meta = `<span class="tag rev">Review ${r.i + 1} of ${r.keys.length}</span><span class="tag">${secName(UI.src.sid)} · Tier ${UI.src.t}</span>${q.typed ? '<span class="tag type">Type it</span>' : ''}`;
   $('#qcol').innerHTML = `${UI.msg ? `<div class="toast" role="status">${UI.msg}</div>` : ''}${cardHtml(q, meta)}`;
-  const pq = $('#padq'); if (pq) pq.innerHTML = q.p;
+  padQ(q); renderPadAns();
   armLock(renderReviewCol);
 }
 function renderReviewDone() {
   const r = UI.rev, { due, later } = reviewLists();
   $('#qcol').innerHTML = `<div class="qcard"><h2>Review finished: ${r.score}/${r.keys.length} first-try correct</h2><p>${due.length ? `${due.length} still due.` : 'Nothing else is due right now.'} ${later.length ? `${later.length} coming up on later days.` : ''}</p><div class="ctrl"><button class="btn primary" data-act="home">Back to home</button>${due.length ? '<button class="btn" data-act="review">Keep going</button>' : ''}</div></div>`;
   const bar = $('#revbar span'); if (bar) bar.style.width = '100%';
+  const pq = $('#padq'); if (pq) pq.textContent = 'Review finished'; renderPadAns();
 }
 
 /* ---------- Explain it ---------- */
@@ -12216,9 +12473,11 @@ async function explainFeedback() {
    the same strokes. strokes is the page's history: pen and eraser strokes, plus Clear as a marker, so Undo brings
    cleared ink back. What shows is everything after the last Clear, with the stroke being drawn (cur) on top. */
 const ERASE_W = 18;
+const PAD_MAX_Y = 20000, PAD_TIP_KEY = STORE_KEY + '-padtip'; // how far down a page can go; how often the scroll tip has shown
 const PEN_PREF_KEY = STORE_KEY + '-pen';
 const Pad = {
   strokes: [], undone: [], color: 'ink', size: 2.4, mode: 'pen', bg: 'grid', box: null, ink: null, back: null, cur: null, ro: null, page: null, cols: null,
+  oy: 0, dpr: 1, touches: null, pan: null, drag: null, answers: false, bb: new WeakMap(),
   /* pencil only: 'on' or 'off' once chosen with the button, or turned on by the first pen stroke; remembered on this
      device, so a palm that lands before the first pen stroke of a later visit is ignored too. null = not decided yet. */
   pref: (() => { try { const v = localStorage.getItem(PEN_PREF_KEY); return v === 'on' || v === 'off' ? v : null; } catch (e) { return null; } })(),
@@ -12236,19 +12495,29 @@ const Pad = {
       <div class="grp"><button class="tool" data-pad="bg" aria-label="Background: ${this.bg}">${{ blank: 'Blank', grid: 'Grid', axes: 'Axes' }[this.bg]}</button>
         <button class="tool" data-pad="pencil" aria-pressed="${this.penOnly()}" title="Ignore finger and palm touches">Pencil only</button></div>
       <div class="grp"><button class="tool" data-pad="undo" aria-label="Undo">↶</button><button class="tool" data-pad="redo" aria-label="Redo">↷</button><button class="tool" data-pad="clear" title="Clear the page (Undo brings it back)">Clear</button></div>
-      <div class="grp"><button class="tool" data-act="pages" title="Your earlier scratchpad pages">Pages</button></div>
-      <button class="tool padclose" data-act="pad" style="margin-left:auto">Done ✕</button>`;
+      <div class="grp"><button class="tool" data-act="pages" title="Your earlier scratchpad pages">Pages</button></div>`;
   },
-  mount(host) {
+  // the phone bottom bar: Exit always; Pick answer and Type answer where there's a question to answer
+  footHtml() {
+    const ic = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+    return `<div class="padfoot"><button type="button" class="btn pfx" data-act="pad" aria-label="Exit the scratchpad">${ic('<path d="M6 6l12 12M18 6L6 18"/>')}Exit</button>${this.answers ? `<button type="button" class="btn" data-act="padans" data-v="pick" aria-pressed="false">${ic('<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7.5 12l3 3 6-6"/>')}Pick answer</button><button type="button" class="btn" data-act="padans" data-v="type" aria-pressed="false">${ic('<rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/>')}Type answer</button>` : ''}</div>`;
+  },
+  mount(host, answers = false) {
+    this.answers = answers;
     host.innerHTML = `<div class="padbar" role="toolbar" aria-label="Scratchpad tools">${this.barHtml()}</div>
       <div class="padq" id="padq"></div>
-      <div class="canvasbox"><canvas class="bgc" aria-hidden="true"></canvas><canvas class="inkc" aria-label="Drawing area"></canvas></div>`;
-    this.box = host.querySelector('.canvasbox'); this.back = host.querySelector('.bgc'); this.ink = host.querySelector('.inkc');
-    const c = this.ink; this.cur = null; this.pid = null; this.cols = null;
+      <div class="canvasbox"><canvas class="bgc" aria-hidden="true"></canvas><canvas class="inkc" aria-label="Drawing area"></canvas>
+        <div class="padrail" aria-hidden="true"><span class="padthumb" title="Drag to scroll"></span></div><div class="padtip" hidden>Scroll with two fingers, or drag the bar on the right</div></div>
+      <div class="padans" id="padans" role="region" aria-label="Answer" hidden></div>
+      ${this.footHtml()}`;
+    this.box = host.querySelector('.canvasbox'); this.back = host.querySelector('.bgc'); this.ink = host.querySelector('.inkc'); this.thumb = host.querySelector('.padthumb'); this.tip = host.querySelector('.padtip');
+    const c = this.ink; this.cur = null; this.pid = null; this.cols = null; this.oy = 0; this.touches = new Map(); this.pan = null; this.drag = null;
     c.addEventListener('pointerdown', e => this.down(e)); c.addEventListener('pointermove', e => this.move(e));
     ['pointerup', 'pointercancel', 'pointerleave', 'lostpointercapture'].forEach(ev => c.addEventListener(ev, e => this.up(e)));
     c.addEventListener('touchstart', e => { if (!this.penOnly()) e.preventDefault(); }, { passive: false });
     host.querySelector('.padbar').addEventListener('click', e => this.bar(e));
+    this.box.addEventListener('wheel', e => this.wheel(e), { passive: false });
+    this.thumbDrag();
     if (this.ro) this.ro.disconnect();
     this.ro = new ResizeObserver(() => this.resize()); this.ro.observe(this.box);
     this.resize();
@@ -12275,27 +12544,95 @@ const Pad = {
   shown() { const S = this.strokes; let i = S.length - 1; while (i >= 0 && S[i].m !== 'clear') i--; return S.slice(i + 1); },
   resize() {
     if (!this.box) return; const r = this.box.getBoundingClientRect(); if (!r.width || !r.height) return;
-    const dpr = Math.min(window.devicePixelRatio || 1, 3);
-    for (const cv of [this.back, this.ink]) { cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr); cv.getContext('2d').setTransform(dpr, 0, 0, dpr, 0, 0); }
-    this.w = r.width; this.h = r.height; this.drawBg(); this.redraw();
+    const dpr = this.dpr = Math.min(window.devicePixelRatio || 1, 3);
+    for (const cv of [this.back, this.ink]) { cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr); }
+    this.w = r.width; this.h = r.height; this.oy = Math.min(this.oy || 0, this.maxOy()); this.drawBg(); this.redraw(); this.rail();
+  },
+  /* scrolling: the page is taller than the screen. oy is how far down it's scrolled, in CSS px, and ink is kept in page
+     coordinates (a point's y is its height on screen plus oy), so it stays where it was written. The page reaches two
+     screens below the first, and always one screen past the lowest ink, so it grows as you write. */
+  maxOy() { return Math.min(PAD_MAX_Y, Math.max(2 * (this.h || 0), this.inkBottom())); },
+  inkBottom() { let b = 0; for (const st of this.shown()) b = Math.max(b, this.bounds(st)[1]); return b; },
+  // the top and bottom of a kept stroke, line width included (worked out once per stroke)
+  bounds(st) {
+    let r = this.bb.get(st); if (r) return r;
+    let y0 = Infinity, y1 = -Infinity; for (const p of st.p) { if (p[1] < y0) y0 = p[1]; if (p[1] > y1) y1 = p[1]; }
+    const m = (st.m === 'erase' ? ERASE_W : st.s * 1.7) / 2 + 2; r = [y0 - m, y1 + m]; this.bb.set(st, r); return r;
+  },
+  scrollTo(v) {
+    const nv = Math.round(Math.max(0, Math.min(this.maxOy(), v))); if (!isFinite(nv) || nv === this.oy) return false;
+    this.oy = nv;
+    // a stroke still being drawn goes on in the right place straight away; the rest of the page follows in the next frame
+    if (this.ink) { const d = this.dpr || 1; this.ink.getContext('2d').setTransform(d, 0, 0, d, 0, -nv * d); }
+    if (!this.raf) this.raf = requestAnimationFrame(() => { this.raf = 0; this.drawBg(); this.redraw(); this.rail(); });
+    return true;
+  },
+  rail() {
+    const t = this.thumb; if (!t || !this.h) return;
+    const m = this.maxOy(); if (this.oy > m) { this.scrollTo(m); return; }
+    const H = this.h - 8, th = Math.min(H, Math.max(44, (H * this.h) / (this.h + m)));
+    t.style.height = th + 'px'; t.style.transform = `translateY(${m ? ((H - th) * this.oy) / m : 0}px)`;
+  },
+  // the bar on the right edge: drag it to scroll, with a finger, the pen or the mouse
+  thumbDrag() {
+    const t = this.thumb; if (!t) return;
+    const end = () => { this.drag = null; t.classList.remove('drag'); };
+    t.addEventListener('pointerdown', e => { e.preventDefault(); try { t.setPointerCapture(e.pointerId); } catch (err) {} this.drag = { id: e.pointerId, y: e.clientY, oy: this.oy }; t.classList.add('drag'); });
+    t.addEventListener('pointermove', e => { const d = this.drag; if (!d || d.id !== e.pointerId) return; const room = this.h - 8 - t.offsetHeight; if (room > 0) this.scrollTo(d.oy + ((e.clientY - d.y) * this.maxOy()) / room); });
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(ev => t.addEventListener(ev, end));
+  },
+  wheel(e) {
+    if (e.ctrlKey || !this.h) return;
+    const k = e.deltaMode === 1 ? 24 : e.deltaMode === 2 ? this.h : 1;
+    if (this.scrollTo(this.oy + e.deltaY * k)) e.preventDefault();
+  },
+  /* two fingers on the page scroll it instead of drawing, in either pen setting. Not while the pen is writing or just
+     after it lifts (that's a palm), and a pen landing ends the scroll. The first finger's mark is dropped, unless it had
+     already been a stroke for a while. */
+  twoFinger(e) {
+    if (this.pan) { e.preventDefault(); return true; }
+    if (this.touches.size < 2 || (this.cur && this.ptype === 'pen') || Date.now() - (this.penT || 0) < 350) return false;
+    if (this.cur && this.ptype === 'touch') { if (Date.now() - (this.t0 || 0) < 400) { this.cur = null; this.pid = null; this.redraw(); } else this.commit(); }
+    e.preventDefault(); try { this.ink.setPointerCapture(e.pointerId); } catch (err) {}
+    this.pan = { y: this.midY(), oy: this.oy, go: false };
+    return true;
+  },
+  midY() { const v = [...this.touches.values()]; return (v[0][1] + v[1][1]) / 2; },
+  // keeps the newest writing in view when the answer drawer makes the page shorter
+  revealLast() {
+    const S = this.shown(); if (!S.length || !this.h) return;
+    const [y0, y1] = this.bounds(S[S.length - 1]);
+    if (y1 > this.oy + this.h) this.scrollTo(Math.min(y0 - 16, y1 - this.h + 16));
+  },
+  // a tip on how to scroll, the first three times the pad opens on a touch screen
+  tipShow() {
+    const t = this.tip; if (!t) return;
+    try { if (!matchMedia('(pointer: coarse)').matches) return; const n = +localStorage.getItem(PAD_TIP_KEY) || 0; if (n >= 3) return; localStorage.setItem(PAD_TIP_KEY, String(n + 1)); } catch (e) { return; }
+    t.hidden = false; clearTimeout(this.tipT); this.tipT = setTimeout(() => { t.hidden = true; }, 4500);
   },
   css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim() || '#000'; },
   drawBg() {
-    if (!this.back) return; const g = this.back.getContext('2d'); g.clearRect(0, 0, this.w, this.h); if (this.bg === 'blank') return;
+    if (!this.back) return; const g = this.back.getContext('2d'), d = this.dpr || 1, top = this.oy || 0, bot = top + (this.h || 0);
+    g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, this.back.width, this.back.height); g.setTransform(d, 0, 0, d, 0, -top * d);
+    if (this.bg === 'blank') return;
     g.strokeStyle = this.css('--grid'); g.lineWidth = 1; const s = 24;
-    for (let x = s; x < this.w; x += s) { g.beginPath(); g.moveTo(x + 0.5, 0); g.lineTo(x + 0.5, this.h); g.stroke(); }
-    for (let y = s; y < this.h; y += s) { g.beginPath(); g.moveTo(0, y + 0.5); g.lineTo(this.w, y + 0.5); g.stroke(); }
-    if (this.bg === 'axes') { g.strokeStyle = this.css('--muted'); g.lineWidth = 1.4; const cx = Math.round(this.w / 2 / s) * s, cy = Math.round(this.h / 2 / s) * s; g.beginPath(); g.moveTo(cx + .5, 0); g.lineTo(cx + .5, this.h); g.moveTo(0, cy + .5); g.lineTo(this.w, cy + .5); g.stroke(); }
+    for (let x = s; x < this.w; x += s) { g.beginPath(); g.moveTo(x + 0.5, top); g.lineTo(x + 0.5, bot); g.stroke(); }
+    for (let y = Math.floor(top / s) * s + s; y < bot; y += s) { g.beginPath(); g.moveTo(0, y + 0.5); g.lineTo(this.w, y + 0.5); g.stroke(); }
+    // the axes cross in the middle of the first screen, and scroll with the page
+    if (this.bg === 'axes') { g.strokeStyle = this.css('--muted'); g.lineWidth = 1.4; const cx = Math.round(this.w / 2 / s) * s, cy = Math.round(this.h / 2 / s) * s; g.beginPath(); g.moveTo(cx + .5, top); g.lineTo(cx + .5, bot); g.moveTo(0, cy + .5); g.lineTo(this.w, cy + .5); g.stroke(); }
   },
   // pen colours are looked up once per redraw, not on every pointer move
   colorOf(k) { const c = this.cols || (this.cols = {}); return c[k] || (c[k] = this.css({ ink: '--ink', blue: '--c1', red: '--bad', green: '--ok' }[k] || '--ink')); },
-  pos(e, r = this.ink.getBoundingClientRect()) { return [e.clientX - r.left, e.clientY - r.top, e.pressure || 0.5]; },
+  pos(e, r = this.ink.getBoundingClientRect()) { return [e.clientX - r.left, e.clientY - r.top + (this.oy || 0), e.pressure || 0.5]; },
   /* one stroke at a time: the pointer that starts a stroke owns it, and only its own move, lift or cancel events change it.
      A touch never takes over from the pen, so a palm landing, resting or lifting can't end or replace a pen stroke, even
      when the pen pauses. A pen that lands while a touch stroke is still being drawn takes over and removes that touch's
      mark: it was the side of a hand. Finger drawing still works with Pencil only turned off. */
   down(e) {
     const type = e.pointerType, touch = type === 'touch', pen = type === 'pen';
+    if (this.tip && !this.tip.hidden) this.tip.hidden = true;
+    if (touch && this.touches) { this.touches.set(e.pointerId, [e.clientX, e.clientY]); if (this.twoFinger(e)) return; }
+    if (pen) this.pan = null; // the pen takes over from a scroll
     if (pen && !this.pref) this.setPref('on');
     if (touch && (this.penOnly() || (this.cur && this.ptype === 'pen'))) return;
     if (this.cur) {
@@ -12308,11 +12645,16 @@ const Pad = {
       }
     }
     e.preventDefault(); try { this.ink.setPointerCapture(e.pointerId); } catch (err) {}
-    this.pid = e.pointerId; this.ptype = type; this.lastT = Date.now();
+    this.pid = e.pointerId; this.ptype = type; this.lastT = this.t0 = Date.now();
     this.cur = { c: this.color, s: this.size, m: this.mode, pen, p: [this.pos(e)] };
     this.seg(this.cur, 1); // a tap shows its dot (or erases a dot's worth) straight away: decimal points, dotted i and j
   },
   move(e) {
+    if (e.pointerType === 'touch' && this.touches && this.touches.has(e.pointerId)) {
+      this.touches.set(e.pointerId, [e.clientX, e.clientY]);
+      // the page follows the fingers, once they have moved a little (a resting hand doesn't scroll it)
+      if (this.pan) { const d = this.midY() - this.pan.y; if (this.pan.go || Math.abs(d) > 8) { this.pan.go = true; this.scrollTo(this.pan.oy - d); } return; }
+    }
     if (!this.cur || e.pointerId !== this.pid) return;
     this.lastT = Date.now();
     const co = e.getCoalescedEvents ? e.getCoalescedEvents() : [], evs = co.length ? co : [e], r = this.ink.getBoundingClientRect();
@@ -12323,14 +12665,16 @@ const Pad = {
      drawn and kept, at the previous pressure (a lift reports none). A cancel or lost capture keeps only the points that
      were reported. Either way a stroke is kept once: its owner is gone after the first of these events. */
   up(e) {
+    // a finger lifting ends a two-finger scroll; with a third finger still down, the scroll goes on from here
+    if (e && e.pointerType === 'touch' && this.touches && this.touches.delete(e.pointerId) && this.pan) this.pan = this.touches.size < 2 ? null : { y: this.midY(), oy: this.oy, go: this.pan.go };
     if (!this.cur || (e && e.pointerId !== this.pid)) return;
     if (e && e.type === 'pointerup') {
-      const r = this.ink.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, last = this.cur.p[this.cur.p.length - 1];
+      const r = this.ink.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top + (this.oy || 0), last = this.cur.p[this.cur.p.length - 1];
       if (isFinite(x) && isFinite(y) && Math.abs(x - last[0]) + Math.abs(y - last[1]) > 0.05) { this.cur.p.push([x, y, last[2]]); this.seg(this.cur, this.cur.p.length - 1); }
     }
     this.commit();
   },
-  commit() { const st = this.cur; this.cur = null; this.pid = null; if (!st) return; this.strokes.push(st); this.undone = []; this.changed(); },
+  commit() { const st = this.cur; this.cur = null; this.pid = null; if (!st) return; if (st.pen) this.penT = Date.now(); this.strokes.push(st); this.undone = []; this.changed(); },
   seg(st, from, g = this.ink.getContext('2d'), colorOf = k => this.colorOf(k)) {
     if (st.m === 'clear') return;
     g.lineCap = 'round'; g.lineJoin = 'round';
@@ -12344,23 +12688,30 @@ const Pad = {
     if (st.p.length === 1) { const [x, y] = st.p[0]; g.beginPath(); g.arc(x, y, st.m === 'erase' ? ERASE_W / 2 : st.s / 2, 0, 7); g.fillStyle = g.strokeStyle; g.fill(); }
     g.globalCompositeOperation = 'source-over';
   },
-  redraw() { if (!this.ink) return; this.cols = null; const g = this.ink.getContext('2d'); g.clearRect(0, 0, this.w || 0, this.h || 0); for (const st of this.shown()) this.seg(st, 1); if (this.cur) this.seg(this.cur, 1); },
+  redraw() {
+    if (!this.ink) return; this.cols = null;
+    const g = this.ink.getContext('2d'), d = this.dpr || 1, top = this.oy || 0, bot = this.h ? top + this.h : Infinity;
+    g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, this.ink.width, this.ink.height); g.setTransform(d, 0, 0, d, 0, -top * d);
+    // only strokes that reach the part of the page on screen are drawn
+    for (const st of this.shown()) { const b = this.bounds(st); if (b[1] >= top && b[0] <= bot) this.seg(st, 1); }
+    if (this.cur) this.seg(this.cur, 1);
+  },
   /* show a page: each question has its own, and each explanation prompt keeps one. Coming back to the same question (after
      the Learn tab, say) shows the same page; ink saved on this device earlier, before a reload, is loaded under it. */
   use(meta) {
     if (this.page && this.page.id === meta.id) return;
     this.flush();
-    this.cur = null; this.pid = null; this.undone = [];
-    const pg = this.page = Pages.open(meta); this.strokes = pg.strokes; this.redraw();
-    pg.ready.then(() => { if (this.page === pg) { this.strokes = pg.strokes; this.redraw(); } });
+    this.cur = null; this.pid = null; this.undone = []; this.oy = 0; this.pan = null;
+    const pg = this.page = Pages.open(meta); this.strokes = pg.strokes; this.drawBg(); this.redraw(); this.rail();
+    pg.ready.then(() => { if (this.page === pg) { this.strokes = pg.strokes; this.redraw(); this.rail(); } });
   },
   // a change is saved a moment later, when another page is shown, and when the app is hidden
-  changed() { const pg = this.page; if (!pg) return; pg.up = Date.now(); pg.rev = (pg.rev || 0) + 1; pg.w = Math.round(this.w || pg.w || 0); pg.h = Math.round(this.h || pg.h || 0); pg.dirty = true; clearTimeout(this.saveT); this.saveT = setTimeout(() => this.flush(), 700); },
+  changed() { this.rail(); const pg = this.page; if (!pg) return; pg.up = Date.now(); pg.rev = (pg.rev || 0) + 1; pg.w = Math.round(this.w || pg.w || 0); pg.h = Math.round(this.h || pg.h || 0); pg.dirty = true; clearTimeout(this.saveT); this.saveT = setTimeout(() => this.flush(), 700); },
   // write every page with unsaved changes now; resolves true once all are stored, false if a write failed
   flush() { clearTimeout(this.saveT); return Pages.saveAll(); },
   toBlob() {
     // dark ink on white, whatever the page theme, so Claude can read it
-    const w = Math.max(1, Math.round(this.w || 600)), h = Math.max(1, Math.round(this.h || 400));
+    const w = Math.max(1, Math.round(this.w || 600)), h = Math.max(1, Math.round(Math.min(PAD_MAX_Y, Math.max(this.h || 400, this.inkBottom() + 16)))); // the whole page, scrolled-off parts too
     const inkC = document.createElement('canvas'); inkC.width = w; inkC.height = h;
     const g = inkC.getContext('2d'); const pal = { ink: '#111111', blue: '#1f3fbf', red: '#b3261e', green: '#146b47' };
     for (const st of this.shown()) this.seg(st, 1, g, k => pal[k]);
@@ -12612,30 +12963,35 @@ function render() {
   saveUI();
 }
 function openSection(sid, tab) { UI.view = 'section'; UI.sid = sid; UI.unit = unitOf(SEC(sid)); if (tab) UI.tab = tab; closeSheet(); try { history.replaceState(null, '', '#s' + sid); } catch (e) {} render(); window.scrollTo({ top: 0 }); }
-function insertAtCaret(txt) {
-  const el = UI.focusEl && document.body.contains(UI.focusEl) ? UI.focusEl : document.querySelector('.tfields input:not([disabled])'); if (!el) return;
+function insertAtCaret(txt, form) {
+  const mine = el => el && document.body.contains(el) && (!form || form.contains(el));
+  const el = mine(UI.focusEl) ? UI.focusEl : (form || document).querySelector('.tfields input:not([disabled]), #pmtext:not([disabled])'); if (!el) return;
   const s = el.selectionStart ?? el.value.length, e = el.selectionEnd ?? el.value.length;
   let ins = txt, caret = s + txt.length;
-  if (txt.endsWith('()') ) caret = s + txt.length - 1; else if (txt === '||') caret = s + 1;
+  if (txt.endsWith('()') ) caret = s + txt.length - 1; else if (txt === '||' || txt === '{}') caret = s + 1;
   el.value = el.value.slice(0, s) + ins + el.value.slice(e); el.focus(); el.setSelectionRange(caret, caret);
-  UI.tv[+el.dataset.tf] = el.value;
+  if (el.dataset.tf !== undefined) UI.tv[+el.dataset.tf] = el.value; else if (el.id === 'pmtext') UI.pmText = el.value;
 }
-document.addEventListener('focusin', e => { if (e.target.matches && e.target.matches('.tfields input')) UI.focusEl = e.target; });
-document.addEventListener('input', e => { if (e.target.matches && e.target.matches('.tfields input')) UI.tv[+e.target.dataset.tf] = e.target.value; });
+document.addEventListener('focusin', e => { if (e.target.matches && e.target.matches('.tfields input, #pmtext')) UI.focusEl = e.target; });
+document.addEventListener('input', e => { if (e.target.matches && e.target.matches('.tfields input')) UI.tv[+e.target.dataset.tf] = e.target.value; if (e.target.id === 'pmtext') UI.pmText = e.target.value; });
 document.addEventListener('change', e => {
   const t = e.target;
-  if (t.matches && t.matches('.tfields select')) UI.tv[+t.id.slice(2)] = t.value;
+  if (t.matches && t.matches('.tfields select')) UI.tv[+(t.dataset.tf ?? t.id.slice(2))] = t.value;
   if (t.dataset && t.dataset.hw) { ST.hw[t.dataset.hw] = { v: t.checked, at: Date.now() }; save(); }
   if (t.dataset && t.dataset.lrn) { ST.lrn[t.dataset.lrn] = { v: t.checked, at: Date.now() }; save(); learnRefresh(); }
   if (t.dataset && t.dataset.tick !== undefined && UI.ex) { UI.ex.ticks[+t.dataset.tick] = t.checked; const b = document.querySelector('[data-ex="score"]'); if (b) { const list = EXPLAIN[UI.ex.sid]; b.textContent = `Save my score (${UI.ex.ticks.filter(Boolean).length}/${list[UI.ex.i % list.length].pts.length})`; } }
 });
-document.addEventListener('submit', e => { if (e.target.id === 'tform') { e.preventDefault(); if (UI.done) { advance(); } else submitTyped(); } });
+document.addEventListener('submit', e => {
+  const id = e.target.id;
+  if (id === 'tform' || id === 'ptform') { e.preventDefault(); if (UI.done) advance(); else submitTyped(id === 'ptform' ? 'p' : ''); }
+  if (id === 'pmform') { e.preventDefault(); if (UI.done) advance(); else submitPick(); }
+});
 function advance() {
   if (UI.view === 'review') { UI.rev.i++; reviewLoad(); window.scrollTo({ top: 0 }); return; }
   nextQuestion(); renderPracticeCol(); const qc = $('#qcol'); if (qc && qc.getBoundingClientRect().top < 0) qc.scrollIntoView({ block: 'start' });
 }
 document.addEventListener('click', e => {
-  const ins = e.target.closest('[data-ins]'); if (ins) { e.preventDefault(); insertAtCaret(ins.dataset.ins); return; }
+  const ins = e.target.closest('[data-ins]'); if (ins) { e.preventDefault(); insertAtCaret(ins.dataset.ins, ins.closest('form')); return; }
   const rs = e.target.closest('#refseg [data-v]'); if (rs) { const box = rs.closest('.box'); if (box) { box.innerHTML = refHtml(+rs.dataset.v); const nb = box.querySelector(`#refseg [data-v="${rs.dataset.v}"]`); if (nb) nb.focus(); else sheetFocus(); } return; }
   const md = e.target.closest('#modeseg [data-v]'); if (md) { UI.mode = md.dataset.v; saveUI(); renderPractice(SEC(UI.sid)); return; }
   const exb = e.target.closest('[data-ex]');
@@ -12675,7 +13031,11 @@ document.addEventListener('click', e => {
   else if (a === 'hl') { UI.hl = !UI.hl; UI.view === 'review' ? renderReviewCol() : renderPracticeCol(); }
   else if (a === 'pages') openPages(b.dataset.page, b.dataset.more);
   else if (a === 'pagedel') { const id = b.dataset.page; if (!b.dataset.sure) { b.dataset.sure = '1'; b.textContent = 'Tap again to delete'; return; } Pages.del(id).then(ok => { if (!ok) { b.textContent = 'Couldn’t delete it. Try again'; delete b.dataset.sure; return; } if (Pad.page && Pad.page.id === id) { Pad.undone = []; Pad.redraw(); } openPages(); }); }
-  else if (a === 'pad') { UI.padOpen = !UI.padOpen; const p = $('#pad'); if (p) { p.dataset.open = UI.padOpen; Pad.resize(); } }
+  else if (a === 'pad') togglePad();
+  else if (a === 'padans') { const v = b.dataset.v || null; UI.ans = v && UI.ans !== v ? v : null; renderPadAns(); }
+  else if (a === 'explain') openSheet(explainHtml(), 'Why your answer was wrong');
+  else if (a === 'xreveal') { if (!UI.done) UI.assisted = true; UI.steps = true; keepQuestion(); UI.view === 'review' ? renderReviewCol() : renderPracticeCol(); const x = document.querySelector('.sheet .xpl'); if (x) { x.outerHTML = explainHtml(); sheetFocus(); } }
+  else if (a === 'xai') explainAI();
 });
 // which choice a key press picks (0–3), or −1: only a plain A–D or 1–4; Ctrl/Cmd+C, Ctrl/Cmd+A and other shortcuts,
 // held-down keys and text being composed are never answers
@@ -12685,7 +13045,7 @@ function answerKey(e) {
   const i = 'abcd1234'.indexOf(k.toLowerCase()); return i < 0 ? -1 : i % 4;
 }
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { if (UI.tmenu) { UI.tmenu = false; renderTop(); const mb = document.querySelector('.menubtn'); if (mb) mb.focus(); } closeSheet(); if (UI.padOpen) { UI.padOpen = false; const p = $('#pad'); if (p) p.dataset.open = false; } }
+  if (e.key === 'Escape') { if (UI.tmenu) { UI.tmenu = false; renderTop(); const mb = document.querySelector('.menubtn'); if (mb) mb.focus(); } const sheet = !!document.querySelector('.sheet'); closeSheet(); if (UI.padOpen && !sheet) togglePad(false); }
   const inPractice = (UI.view === 'section' && UI.tab === 'practice') || UI.view === 'review';
   const editing = e.target && e.target.closest && (e.target.closest('input,select,textarea,canvas,[contenteditable],.study-next') || e.target.isContentEditable);
   if (inPractice && !UI.tmenu && !editing && !document.querySelector('.sheet')) {
@@ -12731,6 +13091,14 @@ function selfTests() {
     ['Pen: where the pen lifts is kept; a cancel adds nothing', () => padRun((ev, d, P, ink) => { ev('pointerdown', 1, 'pen', 10); ev('pointermove', 1, 'pen', 20); ev('pointerup', 1, 'pen', 50); ev('pointerdown', 3, 'pen', 100); ev('pointermove', 3, 'pen', 110); ev('pointercancel', 3, 'pen', 150); const a = P.strokes[0].p, b = P.strokes[1].p; return P.strokes.length === 2 && a.length === 3 && Math.round(a[2][0] - a[1][0]) === 30 && ink(45) > 0 && b.length === 2; })],
     ['Eraser: a tap erases a dot, and Undo brings it back', () => padRun((ev, d, P, ink) => { ev('pointerdown', 1, 'mouse', 60); ev('pointerup', 1, 'mouse', 60); const a0 = ink(60); P.mode = 'erase'; ev('pointerdown', 2, 'mouse', 60); ev('pointerup', 2, 'mouse', 60); const a1 = ink(60); P.undo(); return a0 > 0 && a1 === 0 && ink(60) > 0; })],
     ['Pen: a resize while drawing keeps the stroke on screen', () => padRun((ev, d, P, ink) => { ev('pointerdown', 1, 'pen', 30); ev('pointermove', 1, 'pen', 60); P.resize(); return !!P.cur && ink(45) > 0; })],
+    ['Pad: ink written with the page scrolled down stays lower on the page', () => padRun((ev, d, P) => { P.oy = 120; ev('pointerdown', 1, 'pen', 40); ev('pointerup', 1, 'pen', 40); return P.strokes.length === 1 && Math.abs(P.strokes[0].p[0][1] - 160) < 0.01; })],
+    ['Pad: two fingers scroll the page and leave no ink', () => padRun((ev, d, P) => { P.pref = 'off'; P.h = 200; ev('pointerdown', 1, 'touch', 40); ev('pointerdown', 2, 'touch', 60); ev('pointermove', 1, 'touch', 20); ev('pointermove', 2, 'touch', 30); ev('pointerup', 1, 'touch', 20); ev('pointerup', 2, 'touch', 30); return P.oy > 0 && !P.cur && !P.strokes.length; })],
+    ['Pad: two fingers don’t scroll while the pen is writing (a palm)', () => padRun((ev, d, P) => { P.h = 200; ev('pointerdown', 1, 'pen', 10); ev('pointerdown', 2, 'touch', 80); ev('pointerdown', 3, 'touch', 120); ev('pointermove', 2, 'touch', 20); ev('pointermove', 3, 'touch', 30); ev('pointermove', 1, 'pen', 30); ev('pointerup', 1, 'pen', 30); return P.oy === 0 && P.strokes.length === 1; })],
+    ['Type answer: a set in any order matches its choice; a letter or a near miss doesn’t', () => { const q = { opts: [{ t: M('{−4, 1, 2, 4, 8}'), ok: true }, { t: M('{−4, 1, 2, 4}'), ok: false }, { t: M('{−7, −6, 1, 2, 11}'), ok: false }, { t: M('[−8, −3)'), ok: false }] };
+      return matchOpt(q, '{8,4,2,1,-4}').i === 0 && matchOpt(q, '{ -4, 1, 2, 4 }').i === 1 && matchOpt(q, '[-8,-3)').i === 3 && !!matchOpt(q, 'A').err && !!matchOpt(q, '{1,2}').err && !!matchOpt(q, '[-8,-3]').err; }],
+    ['Type answer: a number or power written another way matches; interval brackets must match', () => { const q = { opts: [{ t: '<span class="fr"><span>1</span><span>2</span></span>', ok: true }, { t: '−3', ok: false }, { t: M('(−∞, 2]'), ok: false }, { t: M('(−∞, 2)'), ok: false }] };
+      const pw = { opts: [{ t: M('x<sup>1/2</sup>(2x² − 1)'), ok: true }, { t: M('x<sup>1/2</sup>(2x⁴ − 1)'), ok: false }, { t: M('−3a<sup>2π</sup>'), ok: false }, { t: M('−3a²'), ok: false }] };
+      return matchOpt(pw, 'x^(1/2)(2x^2 - 1)').i === 0 && matchOpt(pw, 'x^(1/2)(2x^4-1)').i === 1 && matchOpt(pw, '-3a^2π').i === 2 && matchOpt(pw, '-3a^2').i === 3 && matchOpt(pw, '-3a^(2)').i === 3 && matchOpt({ opts: [{ t: '0 ≤ x &lt; 2 or x &gt; 8', ok: true }, { t: '0 ≤ x &lt; −8 or x &gt; −2', ok: false }, { t: '2 &lt; x &lt; 8', ok: false }, { t: 'x &gt; 5', ok: false }] }, '0 <= x < 2 or x > 8').i === 0 && matchOpt(q, '0.5').i === 0 && matchOpt(q, '1/2').i === 0 && matchOpt(q, '-3').i === 1 && matchOpt(q, '(-inf, 2]').i === 2 && matchOpt(q, '(−∞,2)').i === 3 && matchOpt(q, 'x = -3').i === 1; }],
     ['Clear can be undone', () => padRun((ev, d, P, ink) => { ev('pointerdown', 1, 'pen', 30); ev('pointermove', 1, 'pen', 60); ev('pointerup', 1, 'pen', 60); P.clearPage(); const gone = ink(45) === 0 && !P.shown().length; P.undo(); return gone && ink(45) > 0 && P.shown().length === 1; })],
     ['Expanding: (x − 2)² + 8 is equal but not finished; x² − 4x + 12 is right; x² + 12 misses the middle term', () => { const q = tsq(); if (!q) return false; const a = checkTyped(q, ['(x-2)^2+8']), b = checkTyped(q, ['x^2-4x+12']), c = checkTyped(q, ['x^2+12']); return /substitution is correct/.test(a.err || '') && b.ok && !c.ok && /middle term/.test(c.why || ''); }],
     ['Options: (2x − 5)(2x + 3) and (2x + 3)(2x − 5), (−3x)³ and −(3x)³ are one answer; standard form and factored form stay apart', () => formKey(M('(2x − 5)(2x + 3)')) === formKey(M('(2x + 3)(2x − 5)')) && formKey(M('y = (−3x)³')) === formKey(M('y = −(3x)³')) && formKey(M('x² + 3x')) !== formKey(M('3x + x²')) && formKey(M('2(x² − 4)')) !== formKey(M('2(x − 2)(x + 2)')) && formKey(M('−f(x)')) === null],
