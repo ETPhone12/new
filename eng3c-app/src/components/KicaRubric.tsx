@@ -110,7 +110,7 @@ export default function KicaRubric({
                     key={b}
                     type="button"
                     onClick={() => setLevels((l) => ({ ...l, [k.id]: { base: b, mod: b === 'R' ? '' : l[k.id]?.mod ?? '' } }))}
-                    className={cx('min-h-[2.4rem] min-w-[2.6rem] rounded-md border px-2 font-bold', cur?.base === b ? 'border-ink bg-ink text-surface' : 'border-line hover:border-ink/40')}
+                    className={cx('min-h-[2.4rem] min-w-[2.6rem] rounded-md border px-2 font-bold', cur?.base === b ? 'border-primary bg-primary text-onprimary' : 'border-line hover:border-primary/50')}
                     aria-pressed={cur?.base === b}
                     title={b === 'R' ? 'Below level 1' : `Level ${b}`}
                   >
@@ -124,7 +124,7 @@ export default function KicaRubric({
                     type="button"
                     disabled={!cur || cur.base === 'R'}
                     onClick={() => cur && setLevels((l) => ({ ...l, [k.id]: { ...cur, mod: m } }))}
-                    className={cx('min-h-[2.4rem] min-w-[2.4rem] rounded-md border px-2 font-bold disabled:opacity-40', cur && cur.mod === m && cur.base !== 'R' ? 'border-ink bg-sunken' : 'border-line')}
+                    className={cx('min-h-[2.4rem] min-w-[2.4rem] rounded-md border px-2 font-bold disabled:opacity-40', cur && cur.mod === m && cur.base !== 'R' ? 'border-primary bg-primary/10' : 'border-line')}
                     aria-label={m === '+' ? 'High end of level' : m === '-' ? 'Low end of level' : 'Middle of level'}
                   >
                     {m === '' ? '•' : m === '-' ? '−' : '+'}

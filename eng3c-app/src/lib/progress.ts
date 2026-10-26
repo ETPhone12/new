@@ -57,3 +57,49 @@ export function suggestedScores(s: AppState, milestoneId: string): Partial<Recor
 export function moduleOfLesson(lessonId: string) {
   return MODULES.find((m) => m.lessonIds.includes(lessonId))!;
 }
+
+/* ---------- daily streak ---------- */
+
+function localDay(iso: string): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '';
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+/** Every local date with some learning activity. */
+export function activityDays(s: AppState): Set<string> {
+  const stamps = [
+    ...Object.values(s.lessons).map((l) => l.at),
+    ...s.reflections.map((r) => r.at),
+    ...s.assessments.filter((a) => a.source !== 'manual').map((a) => a.at),
+    ...Object.values(s.toolRuns).map((t) => t.at),
+    ...s.speech.map((x) => x.at),
+    ...s.exams.map((e) => e.startedAt),
+  ];
+  return new Set(stamps.map(localDay).filter(Boolean));
+}
+
+export function streak(s: AppState, now = new Date()) {
+  const days = activityDays(s);
+  const key = (d: Date) => localDay(d.toISOString());
+  const today = key(now);
+  const cursor = new Date(now);
+  if (!days.has(today)) cursor.setDate(cursor.getDate() - 1);
+  let count = 0;
+  while (days.has(key(cursor))) {
+    count++;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  const week: { label: string; active: boolean; today: boolean }[] = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - i);
+    week.push({ label: d.toLocaleDateString('en-CA', { weekday: 'narrow' }), active: days.has(key(d)), today: i === 0 });
+  }
+  return { count, activeToday: days.has(today), week };
+}
+
+/** True when something dated `iso` happened on the local calendar day of `now`. */
+export function isToday(iso: string | undefined, now = new Date()): boolean {
+  return !!iso && localDay(iso) === localDay(now.toISOString());
+}

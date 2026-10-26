@@ -118,7 +118,7 @@ export default function PpeBuilder() {
                 <p className="mb-2 text-sm text-muted">{slot.hint}</p>
                 <div className="mb-2 flex flex-wrap gap-1.5">
                   {slot.starters.map((st) => (
-                    <button key={st} type="button" disabled={!open} className="chip font-normal hover:border-ink/40 disabled:opacity-50" onClick={() => update(slot.key, (p[slot.key] ? p[slot.key].trimEnd() + ' ' : '') + st + ' ')}>
+                    <button key={st} type="button" disabled={!open} className="chip font-normal hover:border-primary/50 disabled:opacity-50" onClick={() => update(slot.key, (p[slot.key] ? p[slot.key].trimEnd() + ' ' : '') + st + ' ')}>
                       + {st}
                     </button>
                   ))}

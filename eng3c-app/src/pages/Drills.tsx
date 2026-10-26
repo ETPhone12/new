@@ -26,7 +26,7 @@ export default function Drills({ initial }: { initial?: string }) {
         {[...DRILL_SETS, { id: 'features', title: 'Text Features Hunt', strand: 'B' as const, blurb: 'Tap the subheading, caption, callout, and more on a workplace bulletin.', items: [] }].map((d) => {
           const best = toolBest(s, `drills:${d.id}`);
           return (
-            <button key={d.id} type="button" className="card flex flex-col items-start gap-1.5 p-4 text-left hover:border-ink/30" onClick={() => navigate('drills', d.id)}>
+            <button key={d.id} type="button" className="card flex flex-col items-start gap-1.5 p-4 text-left hover:border-primary/40" onClick={() => navigate('drills', d.id)}>
               <span className="flex w-full items-start justify-between gap-2">
                 <StrandChip id={d.strand} small />
                 {best !== undefined && <ScoreBadge score={best} />}

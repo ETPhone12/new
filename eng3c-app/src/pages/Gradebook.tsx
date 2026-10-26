@@ -44,7 +44,7 @@ export default function Gradebook() {
                     : '')}
             </span>
           </div>
-          <ProgressBar value={g.coverage} tone="pen" label="Share of final grade with marks" />
+          <ProgressBar value={g.coverage} tone="ink" label="Share of final grade with marks" />
         </div>
       </div>
 

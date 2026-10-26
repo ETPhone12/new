@@ -4,8 +4,8 @@ import type { StrandId } from '../types';
 import { closeReflection, toast, useUi } from '../store/ui';
 import { addReflection } from '../store/store';
 import { STRAND_BY_ID } from '../data/curriculum';
-import { Modal, StrandChip } from './ui';
-import { cx } from '../lib/util';
+import { Modal, ProgressRing, StrandChip } from './ui';
+import { cx, formatDuration } from '../lib/util';
 
 export const STRATEGIES: Record<StrandId, { worked: string[]; tripped: string[] }> = {
   A: {
@@ -29,8 +29,9 @@ export const STRATEGIES: Record<StrandId, { worked: string[]; tripped: string[] 
 const SECONDS = 60;
 
 export default function ReflectionModal() {
-  const { reflection } = useUi();
-  const open = reflection !== null;
+  const { reflection, stickerQueue } = useUi();
+  // Wait for any sticker pop-up to close first, so only one dialog shows at a time.
+  const open = reflection !== null && stickerQueue.length === 0;
   const [strand, setStrand] = useState<StrandId>('C');
   const [worked, setWorked] = useState('');
   const [tripped, setTripped] = useState('');
@@ -44,17 +45,17 @@ export default function ReflectionModal() {
     setWorked('');
     setTripped('');
     setAdjust('');
-    setLeft(SECONDS);
-    setStartedAt(Date.now());
   }, [reflection]);
 
   useEffect(() => {
     if (!open) return;
+    setLeft(SECONDS);
+    setStartedAt(Date.now());
     const t = window.setInterval(() => setLeft((s) => Math.max(0, s - 1)), 1000);
     return () => window.clearInterval(t);
   }, [open]);
 
-  if (!reflection) return null;
+  if (!reflection || !open) return null;
   const s = STRATEGIES[strand];
   const code = STRAND_BY_ID[strand].reflection;
   const adjustOk = adjust.trim().split(/\s+/).length >= 4;
@@ -98,19 +99,22 @@ export default function ReflectionModal() {
       }
     >
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="min-w-0">
+        <div className="min-w-0 flex-1">
           <div className="eyebrow">Just finished</div>
-          <div className="font-bold">{reflection.task}</div>
+          <div className="font-extrabold leading-snug">{reflection.task}</div>
+          <div className="hand mt-1 text-xl leading-none text-primary">Quick and honest beats long and perfect.</div>
         </div>
-        <div className={cx('chip num gap-1.5 border-transparent', left > 0 ? 'bg-sunken' : 'bg-warn/15 text-warn')} aria-live="polite">
-          <Timer size={14} />
-          {left > 0 ? `0:${String(left).padStart(2, '0')}` : 'Time! Wrap it up'}
-        </div>
+        <ProgressRing value={left} max={SECONDS} size={60} stroke={7} className={left > 10 ? 'stroke-primary' : 'stroke-warn'} label={left > 0 ? `${left} seconds left` : 'Time is up'}>
+          <span className={cx('num flex flex-col items-center text-[0.8rem] font-black leading-none', left === 0 && 'text-warn')} aria-live="polite">
+            <Timer size={13} className="mb-0.5" />
+            {formatDuration(left)}
+          </span>
+        </ProgressRing>
       </div>
       <div className="mb-4 flex flex-wrap items-center gap-2 text-sm">
         <span className="text-muted">Counts toward</span>
         {(['A', 'B', 'C', 'D'] as StrandId[]).map((id) => (
-          <button key={id} type="button" onClick={() => setStrand(id)} className={cx('rounded-full', strand === id ? 'ring-2 ring-ink ring-offset-1 ring-offset-surface' : 'opacity-60')}>
+          <button key={id} type="button" onClick={() => setStrand(id)} className={cx('rounded-full', strand === id ? 'ring-2 ring-primary ring-offset-2 ring-offset-surface' : 'opacity-60')}>
             <StrandChip id={id} withName={false} small />
           </button>
         ))}
@@ -136,7 +140,7 @@ function ChipField({ id, label, value, onChange, options }: { id: string; label:
       <label htmlFor={id} className="label">{label}</label>
       <div className="mb-2 flex flex-wrap gap-1.5">
         {options.map((o) => (
-          <button key={o} type="button" onClick={() => onChange(o)} className={cx('chip font-normal', value === o ? 'border-ink bg-ink text-surface' : 'hover:border-ink/40')}>
+          <button key={o} type="button" onClick={() => onChange(o)} className={cx('chip font-bold', value === o ? 'border-primary bg-primary text-onprimary' : 'hover:border-primary/50')}>
             {o}
           </button>
         ))}

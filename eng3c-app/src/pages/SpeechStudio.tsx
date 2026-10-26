@@ -520,8 +520,8 @@ function Teleprompter({ script, onClose, recorder }: { script: string; onClose: 
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-ink text-surface" role="dialog" aria-modal="true" aria-label="Teleprompter" style={{ paddingTop: 'env(safe-area-inset-top, 0px)', paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
-      <div className="flex flex-wrap items-center gap-2 border-b border-surface/15 py-2" style={{ paddingLeft: 'max(12px, env(safe-area-inset-left, 0px))', paddingRight: 'max(12px, env(safe-area-inset-right, 0px))' }}>
+    <div className="fixed inset-0 z-50 flex flex-col bg-stage text-onstage" role="dialog" aria-modal="true" aria-label="Teleprompter" style={{ paddingTop: 'env(safe-area-inset-top, 0px)', paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
+      <div className="flex flex-wrap items-center gap-2 border-b border-onstage/15 py-2" style={{ paddingLeft: 'max(12px, env(safe-area-inset-left, 0px))', paddingRight: 'max(12px, env(safe-area-inset-right, 0px))' }}>
         <button type="button" className="btn btn-pen btn-sm" onClick={() => (running ? setRunning(false) : setCount(3))}>
           {running ? <Pause size={16} /> : <Play size={16} />} {running ? 'Pause' : 'Start'}
         </button>
@@ -533,7 +533,7 @@ function Teleprompter({ script, onClose, recorder }: { script: string; onClose: 
           <span>Size</span>
           <input type="range" min={22} max={56} value={size} onChange={(e) => setSize(Number(e.target.value))} aria-label="Text size" />
         </label>
-        <button type="button" className={cx('btn btn-sm border-surface/30 bg-transparent text-surface hover:bg-surface/10', mirror && 'bg-surface/20')} onClick={() => setMirror((m) => !m)} aria-pressed={mirror}>
+        <button type="button" className={cx('btn btn-sm border-onstage/30 bg-transparent text-onstage shadow-none hover:bg-onstage/10', mirror && 'bg-onstage/20')} onClick={() => setMirror((m) => !m)} aria-pressed={mirror}>
           <FlipHorizontal size={15} /> Mirror
         </button>
         {recorder.supported && (
@@ -542,11 +542,11 @@ function Teleprompter({ script, onClose, recorder }: { script: string; onClose: 
           </label>
         )}
         {recorder.recording && (
-          <button type="button" className="btn btn-sm border-surface/30 bg-transparent text-surface" onClick={recorder.stop}>
+          <button type="button" className="btn btn-sm border-onstage/30 bg-transparent text-onstage shadow-none" onClick={recorder.stop}>
             <Square size={14} /> Stop rec {formatDuration(recorder.elapsed)}
           </button>
         )}
-        <button type="button" className="btn btn-sm ml-auto border-surface/30 bg-transparent text-surface hover:bg-surface/10" onClick={() => { setRunning(false); if (recorder.recording) recorder.stop(); onClose(); }} aria-label="Close teleprompter">
+        <button type="button" className="btn btn-sm ml-auto border-onstage/30 bg-transparent text-onstage shadow-none hover:bg-onstage/10" onClick={() => { setRunning(false); if (recorder.recording) recorder.stop(); onClose(); }} aria-label="Close teleprompter">
           <X size={16} />
         </button>
       </div>
@@ -555,10 +555,10 @@ function Teleprompter({ script, onClose, recorder }: { script: string; onClose: 
         <div ref={box} className="h-full overflow-y-auto" style={{ paddingLeft: 'max(24px, env(safe-area-inset-left, 0px))', paddingRight: 'max(24px, env(safe-area-inset-right, 0px))' }}>
           <div className="mx-auto max-w-3xl py-[30vh] font-sans font-bold leading-[1.45]" style={{ fontSize: size, transform: mirror ? 'scaleX(-1)' : undefined }}>
             {renderMarked(script)}
-            <p className="text-surface/40">— end —</p>
+            <p className="text-onstage/40">— end —</p>
           </div>
         </div>
-        {count !== null && <div className="num absolute inset-0 grid place-items-center bg-ink/70 font-display text-[8rem] font-semibold">{count}</div>}
+        {count !== null && <div className="num absolute inset-0 grid place-items-center bg-stage/70 font-display text-[8rem] font-semibold">{count}</div>}
       </div>
     </div>
   );

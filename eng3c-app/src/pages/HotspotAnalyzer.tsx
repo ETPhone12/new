@@ -109,7 +109,7 @@ function PosterAnalyzer({ poster }: { poster: Poster }) {
                           const nextOpen = poster.hotspots.findIndex((_, k) => k !== sel && d.tags[k] === undefined);
                           if (nextOpen !== -1) setSel(nextOpen);
                         }}
-                        className={cx('chip font-normal', d.tags[sel] === t.id ? 'border-ink bg-ink font-bold text-surface' : 'hover:border-ink/40')}
+                        className={cx('chip font-normal', d.tags[sel] === t.id ? 'border-primary bg-primary font-extrabold text-onprimary' : 'hover:border-primary/50')}
                       >
                         {t.label}
                       </button>
@@ -261,7 +261,7 @@ function CustomAnalyzer() {
             <h3 className="mb-2 font-semibold">Pin {pins.indexOf(pin) + 1}</h3>
             <div className="mb-3 flex flex-wrap gap-1.5">
               {MEDIA_TAGS.map((t) => (
-                <button key={t.id} type="button" onClick={() => setPins((ps) => ps.map((p) => (p.id === pin.id ? { ...p, tag: t.id } : p)))} className={cx('chip font-normal', pin.tag === t.id ? 'border-ink bg-ink font-bold text-surface' : 'hover:border-ink/40')}>
+                <button key={t.id} type="button" onClick={() => setPins((ps) => ps.map((p) => (p.id === pin.id ? { ...p, tag: t.id } : p)))} className={cx('chip font-normal', pin.tag === t.id ? 'border-primary bg-primary font-extrabold text-onprimary' : 'hover:border-primary/50')}>
                   {t.label}
                 </button>
               ))}

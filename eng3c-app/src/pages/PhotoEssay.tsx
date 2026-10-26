@@ -274,13 +274,13 @@ function Slideshow({ essay, index, onIndex, onClose }: { essay: Essay; index: nu
   const f = essay.frames[index];
   const img = useImage(f.hasImage ? `photo:${f.id}` : null);
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-ink text-surface" role="dialog" aria-modal="true" aria-label="Photo essay preview" style={{ padding: 'env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px)' }}>
+    <div className="fixed inset-0 z-50 flex flex-col bg-stage text-onstage" role="dialog" aria-modal="true" aria-label="Photo essay preview" style={{ padding: 'env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px)' }}>
       <div className="flex items-center justify-between gap-3 px-4 py-3">
         <div className="min-w-0">
           <div className="truncate font-display text-lg font-semibold">{essay.title || 'Untitled photo essay'}</div>
-          <div className="truncate text-sm text-surface/70">{essay.theme}</div>
+          <div className="truncate text-sm text-onstage/70">{essay.theme}</div>
         </div>
-        <button type="button" className="btn btn-sm border-surface/30 bg-transparent text-surface hover:bg-surface/10" onClick={onClose} aria-label="Close preview"><X size={18} /></button>
+        <button type="button" className="btn btn-sm border-onstage/30 bg-transparent text-onstage shadow-none hover:bg-onstage/10" onClick={onClose} aria-label="Close preview"><X size={18} /></button>
       </div>
       <div className="grid min-h-0 flex-1 place-items-center px-4">
         {img ? (
@@ -292,9 +292,9 @@ function Slideshow({ essay, index, onIndex, onClose }: { essay: Essay; index: nu
       <div className="mx-auto w-full max-w-2xl px-4 py-4">
         <p className="font-read text-lg">{f.caption}</p>
         <div className="mt-3 flex items-center justify-between">
-          <button type="button" className="btn btn-sm border-surface/30 bg-transparent text-surface hover:bg-surface/10" disabled={index === 0} onClick={() => onIndex(index - 1)}><ChevronLeft size={16} /> Back</button>
-          <span className="num text-sm text-surface/70">{index + 1} / {essay.frames.length}</span>
-          <button type="button" className="btn btn-sm border-surface/30 bg-transparent text-surface hover:bg-surface/10" disabled={index === essay.frames.length - 1} onClick={() => onIndex(index + 1)}>Next <ChevronRight size={16} /></button>
+          <button type="button" className="btn btn-sm border-onstage/30 bg-transparent text-onstage shadow-none hover:bg-onstage/10" disabled={index === 0} onClick={() => onIndex(index - 1)}><ChevronLeft size={16} /> Back</button>
+          <span className="num text-sm text-onstage/70">{index + 1} / {essay.frames.length}</span>
+          <button type="button" className="btn btn-sm border-onstage/30 bg-transparent text-onstage shadow-none hover:bg-onstage/10" disabled={index === essay.frames.length - 1} onClick={() => onIndex(index + 1)}>Next <ChevronRight size={16} /></button>
         </div>
       </div>
     </div>

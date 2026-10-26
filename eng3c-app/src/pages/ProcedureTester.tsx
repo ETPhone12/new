@@ -99,7 +99,7 @@ function HowTo() {
               <ol className="mt-2 grid gap-2">
                 {stepsFilled.map((x, k) => (
                   <li key={x.i} className="flex gap-3">
-                    <span className="num grid h-7 w-7 shrink-0 place-items-center rounded-full bg-ink text-sm font-bold text-surface">{k + 1}</span>
+                    <span className="num grid h-7 w-7 shrink-0 place-items-center rounded-full bg-primary text-sm font-black text-onprimary">{k + 1}</span>
                     <span className="pt-0.5">{x.s}</span>
                   </li>
                 ))}

@@ -80,13 +80,13 @@ function Reader({ passage: p }: { passage: Passage }) {
               disabled={d.checked}
               onClick={() => setPen(l)}
               aria-pressed={pen === l}
-              className={cx('flex min-h-[2.4rem] items-center gap-2 rounded-md border px-2.5 text-sm font-bold', pen === l ? 'border-ink bg-sunken' : 'border-transparent hover:bg-sunken')}
+              className={cx('flex min-h-[2.4rem] items-center gap-2 rounded-md border px-2.5 text-sm font-bold', pen === l ? 'border-primary bg-primary/10' : 'border-transparent hover:bg-sunken')}
             >
               <span className={cx('h-4 w-4 rounded-sm', HL_INFO[l].swatch)} aria-hidden />
               {HL_INFO[l].name.split(' /')[0]}
             </button>
           ))}
-          <button type="button" disabled={d.checked} onClick={() => setPen('erase')} aria-pressed={pen === 'erase'} className={cx('flex min-h-[2.4rem] items-center gap-1.5 rounded-md border px-2.5 text-sm font-bold', pen === 'erase' ? 'border-ink bg-sunken' : 'border-transparent hover:bg-sunken')}>
+          <button type="button" disabled={d.checked} onClick={() => setPen('erase')} aria-pressed={pen === 'erase'} className={cx('flex min-h-[2.4rem] items-center gap-1.5 rounded-md border px-2.5 text-sm font-bold', pen === 'erase' ? 'border-primary bg-primary/10' : 'border-transparent hover:bg-sunken')}>
             <Eraser size={16} /> Erase
           </button>
         </div>

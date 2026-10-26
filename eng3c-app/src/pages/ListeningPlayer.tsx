@@ -27,7 +27,7 @@ export default function ListeningPlayer({ initial }: { initial?: string }) {
           const best = toolBest(s, `listening:${p.id}`);
           const words = p.segments.reduce((a, x) => a + x.text.split(/\s+/).length, 0);
           return (
-            <button key={p.id} type="button" className="card flex flex-col items-start gap-1 p-4 text-left hover:border-ink/30" onClick={() => navigate('listening', p.id)}>
+            <button key={p.id} type="button" className="card flex flex-col items-start gap-1 p-4 text-left hover:border-primary/40" onClick={() => navigate('listening', p.id)}>
               <span className="flex w-full items-start justify-between gap-2">
                 <span className="eyebrow">{p.kind}</span>
                 {best !== undefined && <ScoreBadge score={best} />}

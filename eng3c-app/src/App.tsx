@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import Layout from './components/Layout';
 import ReflectionModal from './components/ReflectionModal';
+import { Confetti, StickerWatcher } from './components/Celebrate';
+import { Sparkles } from 'lucide-react';
 import { useRoute } from './lib/router';
 import { useApp } from './store/store';
 import { useUi } from './store/ui';
@@ -102,13 +104,16 @@ export default function App() {
         <Page />
       </div>
       <ReflectionModal />
+      <StickerWatcher />
+      <Confetti />
       {toast && (
         <div
           key={toast.id}
           role="status"
-          className="fade-in fixed left-1/2 z-[60] -translate-x-1/2 rounded-lg bg-ink px-4 py-2.5 text-sm font-bold text-surface shadow-lift"
-          style={{ bottom: 'calc(5rem + env(safe-area-inset-bottom, 0px))' }}
+          className="pop-in fixed left-1/2 z-[60] flex -translate-x-1/2 items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-sm font-extrabold text-surface shadow-lift"
+          style={{ bottom: 'calc(5.5rem + env(safe-area-inset-bottom, 0px))' }}
         >
+          <Sparkles size={16} className="text-sun" />
           {toast.text}
         </div>
       )}

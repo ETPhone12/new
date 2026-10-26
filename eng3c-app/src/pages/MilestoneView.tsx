@@ -20,7 +20,7 @@ export default function MilestoneView({ id }: { id: string }) {
   return (
     <div>
       <button type="button" className="btn btn-ghost btn-sm mb-3 -ml-2" onClick={() => navigate('course')}>
-        <ArrowLeft size={16} /> Course map
+        <ArrowLeft size={16} /> Learning path
       </button>
       <PageHeader eyebrow={`Module ${m.number} · ${ms.kind === 'term' ? 'Term work (70%)' : 'Final evaluation (30%)'}`} title={ms.title} desc={ms.summary} />
       <div className="mb-6 flex flex-wrap gap-2">

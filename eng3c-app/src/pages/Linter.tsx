@@ -126,7 +126,7 @@ export default function Linter() {
 
         <aside className="min-w-0 lg:sticky lg:top-6 lg:self-start">
           {selected && (
-            <div className="card mb-4 border-ink p-4">
+            <div className="card mb-4 !border-primary p-4">
               <div className="mb-1 flex items-center gap-2">
                 <span className={cx('h-2.5 w-2.5 rounded-full', SEV_DOT[selected.severity])} />
                 <span className="font-bold">{KIND_LABEL[selected.kind]}</span>
@@ -145,9 +145,9 @@ export default function Linter() {
           )}
           <div className="card p-4">
             <div className="mb-3 flex flex-wrap gap-1.5">
-              <button type="button" className={cx('chip', filter === 'all' && 'border-ink bg-ink text-surface')} onClick={() => setFilter('all')}>All {issues.length}</button>
+              <button type="button" className={cx('chip', filter === 'all' && 'border-primary bg-primary text-onprimary')} onClick={() => setFilter('all')}>All {issues.length}</button>
               {Object.entries(byKind).map(([k, n]) => (
-                <button key={k} type="button" className={cx('chip font-normal', filter === k && 'border-ink bg-ink font-bold text-surface')} onClick={() => setFilter(k as IssueKind)}>
+                <button key={k} type="button" className={cx('chip font-normal', filter === k && 'border-primary bg-primary font-extrabold text-onprimary')} onClick={() => setFilter(k as IssueKind)}>
                   {KIND_LABEL[k as IssueKind]} {n}
                 </button>
               ))}

@@ -66,11 +66,11 @@ export const STRANDS: Strand[] = [
 export const STRAND_BY_ID: Record<StrandId, Strand> = Object.fromEntries(STRANDS.map((s) => [s.id, s])) as Record<StrandId, Strand>;
 
 /** Tailwind classes for each strand's colour, written out so the build keeps them. */
-export const STRAND_STYLE: Record<StrandId, { text: string; bg: string; soft: string; border: string; dot: string }> = {
-  A: { text: 'text-strandA', bg: 'bg-strandA', soft: 'bg-strandA/10', border: 'border-strandA', dot: 'bg-strandA' },
-  B: { text: 'text-strandB', bg: 'bg-strandB', soft: 'bg-strandB/10', border: 'border-strandB', dot: 'bg-strandB' },
-  C: { text: 'text-strandC', bg: 'bg-strandC', soft: 'bg-strandC/10', border: 'border-strandC', dot: 'bg-strandC' },
-  D: { text: 'text-strandD', bg: 'bg-strandD', soft: 'bg-strandD/10', border: 'border-strandD', dot: 'bg-strandD' },
+export const STRAND_STYLE: Record<StrandId, { text: string; bg: string; soft: string; tint: string; border: string; dot: string }> = {
+  A: { text: 'text-strandA', bg: 'bg-strandA', soft: 'bg-strandA/10', tint: 'bg-strandA/15', border: 'border-strandA', dot: 'bg-strandA' },
+  B: { text: 'text-strandB', bg: 'bg-strandB', soft: 'bg-strandB/10', tint: 'bg-strandB/15', border: 'border-strandB', dot: 'bg-strandB' },
+  C: { text: 'text-strandC', bg: 'bg-strandC', soft: 'bg-strandC/10', tint: 'bg-strandC/15', border: 'border-strandC', dot: 'bg-strandC' },
+  D: { text: 'text-strandD', bg: 'bg-strandD', soft: 'bg-strandD/10', tint: 'bg-strandD/15', border: 'border-strandD', dot: 'bg-strandD' },
 };
 
 export interface TvoUnit {
@@ -316,4 +316,13 @@ export const READING_LIST = {
     { title: 'The Catcher in the Rye', author: 'J.D. Salinger', note: 'First-person voice and the unreliable narrator.' },
     { title: '12 Angry Men', author: 'Reginald Rose', note: 'Play and film on persuasion, bias, and group dynamics.' },
   ],
+};
+
+/** Marker colour and icon name for each module, written out so the build keeps the classes. */
+export const MODULE_STYLE: Record<string, { bg: string; soft: string; text: string; border: string; fill: string; stroke: string; ring: string; icon: 'ClipboardList' | 'Megaphone' | 'Mic' | 'Camera' | 'Scale' }> = {
+  m1: { bg: 'bg-mod1', soft: 'bg-mod1/10', text: 'text-mod1', border: 'border-mod1', fill: 'fill-mod1', stroke: 'stroke-mod1', ring: 'ring-mod1', icon: 'ClipboardList' },
+  m2: { bg: 'bg-mod2', soft: 'bg-mod2/10', text: 'text-mod2', border: 'border-mod2', fill: 'fill-mod2', stroke: 'stroke-mod2', ring: 'ring-mod2', icon: 'Megaphone' },
+  m3: { bg: 'bg-mod3', soft: 'bg-mod3/10', text: 'text-mod3', border: 'border-mod3', fill: 'fill-mod3', stroke: 'stroke-mod3', ring: 'ring-mod3', icon: 'Mic' },
+  m4: { bg: 'bg-mod4', soft: 'bg-mod4/10', text: 'text-mod4', border: 'border-mod4', fill: 'fill-mod4', stroke: 'stroke-mod4', ring: 'ring-mod4', icon: 'Camera' },
+  m5: { bg: 'bg-mod5', soft: 'bg-mod5/10', text: 'text-mod5', border: 'border-mod5', fill: 'fill-mod5', stroke: 'stroke-mod5', ring: 'ring-mod5', icon: 'Scale' },
 };

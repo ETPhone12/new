@@ -46,7 +46,7 @@ export default function SettingsPage() {
             </div>
             <div>
               <div className="label">Appearance</div>
-              <Segmented<ThemePref> label="Theme" value={s.settings.theme} onChange={(v) => updateSettings({ theme: v })} options={[{ value: 'system', label: 'Match device' }, { value: 'light', label: 'Light' }, { value: 'dark', label: 'Dark' }]} />
+              <Segmented<ThemePref> label="Theme" value={s.settings.theme} onChange={(v) => updateSettings({ theme: v })} options={[{ value: 'system', label: 'Match device' }, { value: 'light', label: 'Whiteboard' }, { value: 'dark', label: 'Chalkboard' }]} />
             </div>
           </section>
 

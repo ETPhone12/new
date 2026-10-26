@@ -180,7 +180,7 @@ function ExamRun({ attempt, onSubmitted }: { attempt: ExamAttempt; onSubmitted: 
             <div className="eyebrow mb-2">Part D · Essay (20 marks)</div>
             <div className="mb-4 grid gap-2">
               {EXAM_PROMPTS.map((p) => (
-                <label key={p.id} className={cx('flex cursor-pointer gap-3 rounded-lg border p-3', attempt.essayPrompt === p.id ? 'border-ink bg-sunken' : 'border-line')}>
+                <label key={p.id} className={cx('flex cursor-pointer gap-3 rounded-lg border p-3', attempt.essayPrompt === p.id ? 'border-primary bg-primary/10' : 'border-line')}>
                   <input type="radio" name="prompt" className="mt-1" checked={attempt.essayPrompt === p.id} onChange={() => update({ essayPrompt: p.id })} />
                   <span>
                     <span className="block font-bold">{p.title}</span>
@@ -277,7 +277,7 @@ function ExamResults({ attempt, onBack }: { attempt: ExamAttempt; onBack: () => 
                 <div className="mt-2 flex items-center gap-2">
                   <span className="text-sm">Your mark:</span>
                   {Array.from({ length: sa.marks + 1 }, (_, k) => (
-                    <button key={k} type="button" onClick={() => setShort(sa.id, k)} className={cx('num h-9 w-9 rounded-md border font-bold', shortScores[sa.id] === k ? 'border-ink bg-ink text-surface' : 'border-line')}>
+                    <button key={k} type="button" onClick={() => setShort(sa.id, k)} className={cx('num h-9 w-9 rounded-md border font-bold', shortScores[sa.id] === k ? 'border-primary bg-primary text-onprimary' : 'border-line')}>
                       {k}
                     </button>
                   ))}

@@ -16,6 +16,17 @@ Built for iPad and desktop, and works on phones. Installable as an offline web a
 | 4. Media Literacy & Visual Storytelling | D, B | PSA deconstruction + 5-frame photo essay |
 | 5. Comparative Analysis & Culminating Prep | all | Compare & contrast essay + timed exam |
 
+**Classroom look and feel**
+
+- *Today* page: a "Today's agenda" whiteboard (lesson → practice → reflection), a weekly learning streak, course progress, and module cards in their own colours.
+- *Learning path*: each module's lessons are stops on a trail that fills in as you go, ending at the portfolio task trophy.
+- *3-part lessons* in the Ontario format:
+  - **Minds On**: a sticky-note hook, the learning goal, and "I can…" success criteria you tick off.
+  - **Action**: the teaching notes, a chalkboard "teacher model", and a word wall of index cards.
+  - **Consolidation**: an exit ticket, practice tools, then "Mark complete" with confetti and the 60-second reflection.
+- *Sticker chart*: 18 stickers for milestones such as finishing a module, reflecting in all four strands, or speaking at 130–150 WPM.
+- *Themes*: "Whiteboard" (light) and "Chalkboard" (dark). The fonts are Nunito for the interface, Literata for reading passages, and Caveat for handwritten notes.
+
 **Tools by strand**
 
 - **Reading (B)**
@@ -38,7 +49,7 @@ Built for iPad and desktop, and works on phones. Installable as an offline web a
   - *KICA Gradebook*: self-assessment rubrics (levels R to 4+, converted to %). Includes adjustable KICA weights, the 70/30 split, recent-weighted, median, or average term marks, and a "mark needed on the rest" calculator. You can enter real course marks too.
   - *Mock Final Exam*: timed (60/90/120 min). It has a sight passage, a graphic text, conventions, and an essay. Multiple choice is auto-marked; short answers are self-marked against model answers.
   - *Blueprint Explorer*: an interactive diagram linking strands, TVO units, modules, tools, and KICA.
-  - *Glossary*: about 120 terms, with flashcards.
+  - *Word Wall*: about 120 terms on index cards grouped by letter, with flashcards.
 
 All practice passages, posters, brands, and people are original or fictional. The only exceptions are short quotations from public-domain speeches (Lincoln, FDR, Douglass).
 

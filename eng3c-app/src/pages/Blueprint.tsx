@@ -228,7 +228,7 @@ export default function Blueprint() {
                         aria-pressed={on}
                         className={cx(
                           'relative rounded-lg border bg-surface px-3 py-2 text-left transition-all',
-                          on ? 'border-ink shadow-lift ring-2 ring-ink/80' : near ? 'border-ink/40' : 'border-line opacity-55 hover:opacity-100',
+                          on ? 'border-primary shadow-lift ring-2 ring-primary/70' : near ? 'border-primary/40' : 'border-line opacity-55 hover:opacity-100',
                         )}
                       >
                         {n.strand && <span className={cx('absolute left-0 top-2 bottom-2 w-[3px] rounded-full', STRAND_STYLE[n.strand].bg)} aria-hidden />}
@@ -265,7 +265,7 @@ export default function Blueprint() {
                     <div className="eyebrow mb-1">{c.title}</div>
                     <div className="flex flex-wrap gap-1.5">
                       {list.map((n) => (
-                        <button key={n.id} type="button" className="chip font-normal hover:border-ink/40" onClick={() => setSel(n.id)}>
+                        <button key={n.id} type="button" className="chip font-normal hover:border-primary/50" onClick={() => setSel(n.id)}>
                           {n.label}
                         </button>
                       ))}
