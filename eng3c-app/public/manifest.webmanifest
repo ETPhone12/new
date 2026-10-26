@@ -1,0 +1,12 @@
+{
+  "name": "ENG3C Studio",
+  "short_name": "ENG3C",
+  "description": "Practice studio for Ontario Grade 11 College English (ENG3C / NBE3C).",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F3F5F8",
+  "theme_color": "#141E34",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

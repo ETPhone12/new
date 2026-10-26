@@ -1,0 +1,231 @@
+/* Layout: an editor's desk. Cool paper ground, navy ink, a red correction pen
+   for emphasis, and the four strand highlighters (oral, reading, writing, media). */
+:root {
+  --bg: 243 245 248;
+  --surface: 255 255 255;
+  --sunken: 233 237 243;
+  --line: 214 220 230;
+  --ink: 20 30 52;
+  --muted: 84 96 118;
+  --pen: 196 36 52;
+  --onpen: 255 255 255;
+  --good: 21 122 70;
+  --warn: 170 102 6;
+  --bad: 190 40 40;
+  --strand-a: 205 100 12;
+  --strand-b: 37 99 200;
+  --strand-c: 20 132 84;
+  --strand-d: 120 70 205;
+  --hl-thesis: 96 165 250;
+  --hl-fact: 74 222 128;
+  --hl-opinion: 250 204 21;
+  --hl-inference: 192 132 252;
+  --shadow: 20 30 52;
+  --onhl: 24 24 27;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: 13 18 30;
+    --surface: 22 29 45;
+    --sunken: 17 23 37;
+    --line: 46 57 82;
+    --ink: 230 235 243;
+    --muted: 156 167 188;
+    --pen: 255 104 118;
+    --onpen: 28 8 12;
+    --good: 84 205 140;
+    --warn: 242 176 72;
+    --bad: 250 112 112;
+    --strand-a: 246 156 80;
+    --strand-b: 118 166 250;
+    --strand-c: 80 205 148;
+    --strand-d: 180 146 250;
+    --hl-thesis: 96 165 250;
+    --hl-fact: 74 222 128;
+    --hl-opinion: 250 204 21;
+    --hl-inference: 192 132 252;
+    --shadow: 0 0 0;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: 13 18 30;
+  --surface: 22 29 45;
+  --sunken: 17 23 37;
+  --line: 46 57 82;
+  --ink: 230 235 243;
+  --muted: 156 167 188;
+  --pen: 255 104 118;
+  --onpen: 28 8 12;
+  --good: 84 205 140;
+  --warn: 242 176 72;
+  --bad: 250 112 112;
+  --strand-a: 246 156 80;
+  --strand-b: 118 166 250;
+  --strand-c: 80 205 148;
+  --strand-d: 180 146 250;
+  --hl-thesis: 96 165 250;
+  --hl-fact: 74 222 128;
+  --hl-opinion: 250 204 21;
+  --hl-inference: 192 132 252;
+  --shadow: 0 0 0;
+  color-scheme: dark;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: rgb(var(--bg));
+    color: rgb(var(--ink));
+    font-family: theme('fontFamily.sans');
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    font-family: theme('fontFamily.display');
+    text-wrap: balance;
+    line-height: 1.15;
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--pen));
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: rgb(var(--hl-opinion) / 0.45);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .gutter {
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .card {
+    background: rgb(var(--surface));
+    border: 1px solid rgb(var(--line));
+    border-radius: 10px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-height: 2.5rem;
+    padding: 0.45rem 0.95rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: 1px solid rgb(var(--line));
+    background: rgb(var(--surface));
+    color: rgb(var(--ink));
+    transition: background-color 120ms, border-color 120ms, transform 80ms;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  .btn:hover { background: rgb(var(--sunken)); }
+  .btn:active { transform: translateY(1px); }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+  .btn-primary {
+    background: rgb(var(--ink));
+    color: rgb(var(--surface));
+    border-color: rgb(var(--ink));
+  }
+  .btn-primary:hover { background: rgb(var(--ink) / 0.88); }
+  .btn-pen {
+    background: rgb(var(--pen));
+    color: rgb(var(--onpen));
+    border-color: rgb(var(--pen));
+  }
+  .btn-pen:hover { background: rgb(var(--pen) / 0.88); }
+  .btn-ghost { background: transparent; border-color: transparent; }
+  .btn-ghost:hover { background: rgb(var(--sunken)); }
+  .btn-sm { min-height: 2rem; padding: 0.25rem 0.65rem; font-size: 0.85rem; }
+  .input {
+    width: 100%;
+    background: rgb(var(--surface));
+    color: rgb(var(--ink));
+    border: 1px solid rgb(var(--line));
+    border-radius: 8px;
+    padding: 0.6rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+  .input::placeholder { color: rgb(var(--muted) / 0.8); }
+  .input:focus { outline: 2px solid rgb(var(--strand-b) / 0.5); outline-offset: 0; border-color: rgb(var(--strand-b)); }
+  .label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgb(var(--muted));
+    margin-bottom: 0.35rem;
+  }
+  .eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgb(var(--muted));
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    border-radius: 999px;
+    padding: 0.15rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    border: 1px solid rgb(var(--line));
+    background: rgb(var(--surface));
+    white-space: nowrap;
+  }
+  .prose-read {
+    font-family: theme('fontFamily.read');
+    font-size: 1.06rem;
+    line-height: 1.75;
+    max-width: 68ch;
+  }
+  .num { font-variant-numeric: tabular-nums; }
+  .hl-thesis { background: rgb(var(--hl-thesis) / 0.38); box-shadow: inset 0 -2px 0 rgb(var(--hl-thesis)); }
+  .hl-fact { background: rgb(var(--hl-fact) / 0.36); box-shadow: inset 0 -2px 0 rgb(var(--hl-fact)); }
+  .hl-opinion { background: rgb(var(--hl-opinion) / 0.42); box-shadow: inset 0 -2px 0 rgb(var(--hl-opinion)); }
+  .hl-inference { background: rgb(var(--hl-inference) / 0.36); box-shadow: inset 0 -2px 0 rgb(var(--hl-inference)); }
+  .squiggle-bad { text-decoration: underline wavy rgb(var(--bad)); text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+  .squiggle-warn { text-decoration: underline wavy rgb(var(--warn)); text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+  .squiggle-info { text-decoration: underline dotted rgb(var(--strand-b)); text-underline-offset: 3px; text-decoration-thickness: 2px; }
+  .ruled {
+    background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 27px, rgb(var(--line) / 0.7) 27px, rgb(var(--line) / 0.7) 28px);
+    line-height: 28px;
+  }
+}
+
+.fade-in { animation: fadeIn 180ms ease-out; }
+@keyframes fadeIn { from { opacity: 0.4; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+
+/* Paints the strip under the phone's status bar so scrolled content never shows behind it. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 35;
+  background: rgb(var(--bg));
+}

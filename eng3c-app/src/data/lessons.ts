@@ -1,0 +1,1381 @@
+import type { Lesson } from '../types';
+
+export const LESSONS: Lesson[] = [
+  /* ---------------------------- Module 1 ---------------------------- */
+  {
+    id: '1-1',
+    moduleId: 'm1',
+    number: 1,
+    title: 'Decoding Graphic Texts & Schematics',
+    strands: ['B'],
+    expectations: ['B1', 'B2', 'B3'],
+    minutes: 25,
+    hook: 'A graphic text can say in one glance what a paragraph needs 200 words to say. It can also mislead you in one glance.',
+    sections: [
+      {
+        heading: 'Read it in this order',
+        body: [
+          'Title and subtitle: what is it about, and what does it claim?',
+          'Source and date: who made it, and is it current? No source is a red flag.',
+          'Legend (key), axis labels, and units: what do the colours, symbols, and numbers stand for?',
+          'The data: find the biggest and smallest values, the overall trend, and any outlier.',
+          'Caption or takeaway: does the headline actually match the numbers?',
+        ],
+      },
+      {
+        heading: 'Types you will meet',
+        body: [
+          'Bar and line graphs compare amounts or show change over time.',
+          'Pie charts show parts of a whole. The slices must add up to 100%.',
+          'Flowcharts show a process, including decision points (yes/no diamonds).',
+          'Schematics and labelled diagrams show parts and how they connect.',
+          'Floor plans and maps show space. Check the scale, the compass, and the legend.',
+          'Infographics mix all of these with short text and icons.',
+        ],
+      },
+      {
+        heading: 'Design tricks to catch',
+        body: [
+          'A truncated y-axis (one that starts above zero) makes small differences look huge.',
+          'A cherry-picked time range hides the longer trend.',
+          '3-D pie charts and scaled icons distort size.',
+          'Percentages without the base number ("up 200%!" from 1 to 3) inflate change.',
+        ],
+      },
+    ],
+    keyTerms: [
+      { term: 'Graphic text', def: 'A text that communicates mainly through visuals: charts, diagrams, maps, infographics, comics.' },
+      { term: 'Legend (key)', def: 'The box that explains what colours, symbols, or patterns mean.' },
+      { term: 'Axis', def: 'The horizontal (x) or vertical (y) reference line on a graph, with labels and units.' },
+      { term: 'Scale', def: 'The ratio between a drawing and real life, e.g. 1 cm = 2 m on a floor plan.' },
+      { term: 'Schematic', def: 'A simplified diagram showing parts of a system and how they connect.' },
+      { term: 'Callout', def: 'A label or box that points to and explains one part of a graphic.' },
+      { term: 'Truncated axis', def: 'An axis that starts above zero, exaggerating differences between values.' },
+    ],
+    example: {
+      label: 'Decoding out loud',
+      text: '"The title says screen time is exploding. The source is a 2025 survey of 400 students. The y-axis starts at 4 hours, not 0, so the Grade 12 bar looks three times taller than Grade 9, but the real difference is only 1.2 hours. The headline exaggerates."',
+    },
+    quiz: [
+      {
+        q: 'A bar graph’s y-axis starts at 40 instead of 0. What does this do?',
+        options: ['Makes the differences look bigger than they are', 'Makes the chart more accurate', 'Hides the source of the data', 'Turns it into a pie chart'],
+        answer: 0,
+        why: 'Cutting off the bottom of the bars exaggerates small gaps.',
+      },
+      {
+        q: 'Which feature of a floor plan tells you that 1 cm equals 2 m?',
+        options: ['The legend', 'The scale', 'The compass rose', 'A callout'],
+        answer: 1,
+        why: 'The scale converts drawing size to real size.',
+      },
+      {
+        q: 'What should you check first on an unfamiliar infographic?',
+        options: ['The brightest colour', 'The biggest number', 'The title and the source', 'The logo'],
+        answer: 2,
+        why: 'The title tells you the claim; the source tells you whether to trust it.',
+      },
+    ],
+    practice: [{ tool: 'graphic', label: 'Open the Graphic Text Lab' }],
+  },
+  {
+    id: '1-2',
+    moduleId: 'm1',
+    number: 2,
+    title: 'Fact vs. Opinion & Source Bias',
+    strands: ['B', 'D'],
+    expectations: ['B1', 'D1'],
+    tvo: '1.4',
+    minutes: 25,
+    hook: 'Most persuasive texts mix facts and opinions in the same sentence. Your job is to pull them apart.',
+    sections: [
+      {
+        heading: 'The test',
+        body: [
+          'A fact can be checked: measured, counted, or documented. "The pool opens at 6 a.m."',
+          'An opinion is a judgment, feeling, or prediction. "The pool opens far too early."',
+          'Ask: could two honest people check this and agree? If yes, it is a fact claim (it may still be false).',
+          'Opinion signals: should, must, best, worst, unfair, amazing, obviously, I believe.',
+          '"Experts say the plan will fail." It is a fact that they said it. "The plan will fail" is still an opinion.',
+        ],
+      },
+      {
+        heading: 'Loaded language and spin',
+        body: [
+          'Loaded words carry emotion: "scheme" vs. "plan", "slashed" vs. "reduced", "mob" vs. "crowd".',
+          'Spin is choosing which true facts to show, and which words to wrap them in, to push one reading.',
+          'A statistic can be accurate and still misleading if the base number or time frame is hidden.',
+        ],
+      },
+      {
+        heading: 'Source bias checklist',
+        body: [
+          'Who wrote it, and what do they gain if you believe it?',
+          'Who is quoted, and whose voices are missing?',
+          'Is it news, opinion, an advertisement, or sponsored content?',
+          'When was it published? Is it still current?',
+          'Can you confirm the key claim in two independent sources?',
+        ],
+      },
+    ],
+    keyTerms: [
+      { term: 'Fact', def: 'A statement that can be verified with evidence.' },
+      { term: 'Opinion', def: 'A judgment, belief, or feeling that cannot be proven true or false.' },
+      { term: 'Bias', def: 'A one-sided leaning that shapes what a source includes, leaves out, or emphasizes.' },
+      { term: 'Loaded language', def: 'Words chosen for their emotional charge to influence the reader.' },
+      { term: 'Spin', def: 'Selective framing of facts to create a favourable or unfavourable impression.' },
+      { term: 'Sponsored content', def: 'Paid material made to look like regular articles or posts.' },
+      { term: 'Missing voices', def: 'People affected by an issue whose perspective the text leaves out.' },
+    ],
+    quiz: [
+      {
+        q: 'Which statement is a verifiable fact?',
+        options: ['The library is the best place to study.', 'The library is open until 9 p.m. on weekdays.', 'Libraries should open on Sundays.', 'Everyone loves the new library.'],
+        answer: 1,
+        why: 'Opening hours can be checked. The others are judgments or generalizations.',
+      },
+      {
+        q: 'A headline says the council "slashed" arts funding. "Slashed" is an example of:',
+        options: ['A statistic', 'Neutral reporting', 'Loaded language', 'A citation'],
+        answer: 2,
+        why: '"Slashed" suggests violence and carelessness; "reduced" is neutral.',
+      },
+      {
+        q: 'An article about a new energy drink quotes only the company’s CEO. What is the biggest problem?',
+        options: ['It is too short', 'Independent voices are missing', 'It uses statistics', 'It has a headline'],
+        answer: 1,
+        why: 'With only the seller quoted, there is no independent check on the claims.',
+      },
+    ],
+    practice: [
+      { tool: 'reader', label: 'Deconstruct the news report', param: 'transit' },
+      { tool: 'reader', label: 'Deconstruct the advertorial', param: 'hydrate' },
+    ],
+  },
+  {
+    id: '1-3',
+    moduleId: 'm1',
+    number: 3,
+    title: 'Active Voice & Concise Sentences',
+    strands: ['C'],
+    expectations: ['C2', 'C3'],
+    minutes: 20,
+    hook: 'College and workplace readers skim. Every extra word is a chance for them to stop reading.',
+    sections: [
+      {
+        heading: 'Active vs. passive',
+        body: [
+          'Active: the subject does the action. "The manager approved the schedule."',
+          'Passive: the subject receives the action. "The schedule was approved by the manager."',
+          'Spot it: a form of "be" (is, was, were, been) plus a past participle, often followed by "by...".',
+          'Passive voice can hide responsibility: "Mistakes were made." By whom?',
+          'Use passive only when the doer is unknown or unimportant: "The bridge was built in 1952."',
+        ],
+      },
+      {
+        heading: 'Cut the padding',
+        body: [
+          'Swap wordy phrases for one word: "due to the fact that" becomes "because"; "in order to" becomes "to".',
+          'Cut empty intensifiers like very, really, and totally. Choose one precise word: "very tired" becomes "exhausted".',
+          'Replace vague nouns (things, stuff, aspects) with the exact item.',
+          'Delete throat-clearing openers: "It is important to note that..."',
+        ],
+      },
+      {
+        heading: 'Sentence boundaries',
+        body: [
+          'Comma splice: two complete sentences joined by a comma. "The bus was late, we missed class."',
+          'Fix it with a period, a semicolon, or a joining word: "The bus was late, so we missed class."',
+          'Run-on: two or more sentences jammed together with no punctuation at all.',
+          'Fragment: a "sentence" missing a subject or a complete verb. "Because the bus was late."',
+        ],
+      },
+    ],
+    keyTerms: [
+      { term: 'Active voice', def: 'Sentence structure where the subject performs the action.' },
+      { term: 'Passive voice', def: 'Sentence structure where the subject receives the action.' },
+      { term: 'Concision', def: 'Saying something in the fewest words that keep its full meaning.' },
+      { term: 'Comma splice', def: 'Two independent clauses joined only by a comma.' },
+      { term: 'Run-on sentence', def: 'Two or more independent clauses joined with no punctuation or conjunction.' },
+      { term: 'Fragment', def: 'An incomplete sentence missing a subject, a verb, or a complete thought.' },
+      { term: 'Register', def: 'The level of formality in language, chosen to suit the audience and purpose.' },
+    ],
+    example: {
+      label: 'Before and after',
+      text: 'Before (31 words): "It is important to note that due to the fact that the forms were not submitted by a large number of employees, the payroll was delayed by the office."\nAfter (12 words): "Payroll was late because many employees did not submit their forms."',
+    },
+    quiz: [
+      {
+        q: 'Which sentence is in the active voice?',
+        options: ['The order was shipped on Monday.', 'Mistakes were made.', 'Jordan shipped the order on Monday.', 'The window has been broken.'],
+        answer: 2,
+        why: 'Jordan (the subject) does the shipping.',
+      },
+      {
+        q: 'Which revision fixes the comma splice "The shift ended, we went home."?',
+        options: ['The shift ended, we, went home.', 'The shift ended, so we went home.', 'The shift ended we went home.', 'The shift, ended, we went home.'],
+        answer: 1,
+        why: 'Adding "so" joins the two clauses correctly.',
+      },
+      {
+        q: 'The best replacement for "due to the fact that" is:',
+        options: ['because', 'owing to the reality that', 'since the fact is', 'as a result of the fact'],
+        answer: 0,
+        why: 'One word does the job of five.',
+      },
+    ],
+    practice: [{ tool: 'linter', label: 'Open the Precision Linter' }],
+  },
+  {
+    id: '1-4',
+    moduleId: 'm1',
+    number: 4,
+    title: 'Writing Procedural Guides & Business Memos',
+    strands: ['C'],
+    expectations: ['C1', 'C2', 'C3'],
+    minutes: 30,
+    hook: 'If a first-time reader has to ask you a question, the instructions failed.',
+    sections: [
+      {
+        heading: 'Anatomy of instructions',
+        body: [
+          'Title that names the task: "How to Replace a Bike Inner Tube".',
+          'Purpose and audience: who this is for and what they will achieve.',
+          'Materials and prerequisites, listed before Step 1.',
+          'Safety warnings placed before the step where the danger happens.',
+          'Numbered steps, one action each, starting with a command verb.',
+          'Expected result and troubleshooting: "The light turns green. If it flashes red, ..."',
+        ],
+      },
+      {
+        heading: 'Zero-ambiguity rules',
+        body: [
+          'Start every step with a verb: Press, Remove, Wait, Turn.',
+          'Replace "some", "a while", and "properly" with numbers and visible signals.',
+          'Name parts the same way every time. Do not switch from "lid" to "cover".',
+          'Put conditions first: "If the screen stays black, hold the reset button for 10 seconds."',
+          'Test it on someone who has never done the task, and watch where they hesitate.',
+        ],
+      },
+      {
+        heading: 'Business memos',
+        body: [
+          'Headings: TO, FROM, DATE, SUBJECT. No "Dear".',
+          'The subject line is specific: "Staff Parking Closed June 3–5 for Repaving".',
+          'The first sentence states the purpose.',
+          'Short paragraphs, then a clear action and deadline: "Please submit your form by Friday, May 9."',
+        ],
+      },
+    ],
+    keyTerms: [
+      { term: 'Imperative mood', def: 'The command form of a verb, used in instructions: "Turn the dial."' },
+      { term: 'SOP', def: 'Standard operating procedure: a workplace document that makes a task repeatable and safe.' },
+      { term: 'Prerequisite', def: 'Something the reader must have or do before starting.' },
+      { term: 'Memo', def: 'A short internal business message with TO/FROM/DATE/SUBJECT headings.' },
+      { term: 'Subject line', def: 'A specific one-line summary that tells the reader what the message is about.' },
+      { term: 'Troubleshooting', def: 'Instructions for what to do when a step does not work as expected.' },
+    ],
+    quiz: [
+      {
+        q: 'Which step is written best?',
+        options: ['You should probably hold the button for a while.', 'The button is held down.', 'Press and hold the power button for 5 seconds.', 'Hold it until it works properly.'],
+        answer: 2,
+        why: 'Command verb, named part, exact time.',
+      },
+      {
+        q: 'Where do safety warnings belong in a procedure?',
+        options: ['At the very end', 'Before the step where the hazard occurs', 'In the title', 'Only in the materials list'],
+        answer: 1,
+        why: 'Readers act step by step. A warning after the step is too late.',
+      },
+      {
+        q: 'Which memo subject line is most effective?',
+        options: ['Update', 'Important!!!', 'Parking', 'Staff Parking Closed June 3–5 for Repaving'],
+        answer: 3,
+        why: 'It tells the reader what, where, and when before they open it.',
+      },
+    ],
+    practice: [
+      { tool: 'procedure', label: 'Open the How-To Stress Tester' },
+      { tool: 'procedure', label: 'Write a business memo', param: 'memo' },
+    ],
+  },
+
+  /* ---------------------------- Module 2 ---------------------------- */
+  {
+    id: '2-1',
+    moduleId: 'm2',
+    number: 1,
+    title: 'Ethos, Pathos, Logos & Rhetorical Devices',
+    strands: ['B', 'C'],
+    expectations: ['B2', 'C2', 'A1'],
+    tvo: '1.3',
+    minutes: 25,
+    hook: 'Every ad, speech, and op-ed is trying to move you. Name the move and it loses its grip.',
+    sections: [
+      {
+        heading: 'The three appeals',
+        body: [
+          'Ethos (credibility): experience, expertise, shared values, a fair tone. "As a paramedic for 15 years..."',
+          'Pathos (emotion): stories, vivid images, emotional words. "She never made it home."',
+          'Logos (logic): statistics, facts, cause and effect, examples. "Crashes drop 23% when..."',
+          'Strong persuasion blends all three. Weak persuasion leans on one.',
+        ],
+      },
+      {
+        heading: 'Devices to know',
+        body: [
+          'Rhetorical question: asked for effect, not for an answer. "Is a text worth a life?"',
+          'Repetition and anaphora: repeating a word or phrase at the start of clauses.',
+          'Tricolon (rule of three): "Stop. Look. Listen."',
+          'Direct address and inclusive language: "you", "we", "our community".',
+          'Hyperbole: deliberate exaggeration. Juxtaposition: two opposites placed side by side.',
+          'Call to action: an imperative telling the audience what to do next.',
+        ],
+      },
+      {
+        heading: 'How to analyze a device',
+        body: ['Name the device, quote it, then explain its effect on the target audience. That is a PPE paragraph in miniature.'],
+      },
+    ],
+    keyTerms: [
+      { term: 'Ethos', def: 'An appeal to the speaker’s credibility, character, or authority.' },
+      { term: 'Pathos', def: 'An appeal to the audience’s emotions.' },
+      { term: 'Logos', def: 'An appeal to logic, facts, and reasoning.' },
+      { term: 'Rhetorical question', def: 'A question asked to make a point rather than to get an answer.' },
+      { term: 'Anaphora', def: 'Repeating the same word or phrase at the start of successive clauses.' },
+      { term: 'Tricolon', def: 'A series of three parallel words, phrases, or clauses.' },
+      { term: 'Juxtaposition', def: 'Placing contrasting ideas or images side by side to highlight the difference.' },
+      { term: 'Call to action', def: 'A direct instruction telling the audience what to do.' },
+    ],
+    quiz: [
+      {
+        q: '"As a nurse who has worked night shifts for ten years, I know what fatigue does." This mainly uses:',
+        options: ['Logos', 'Ethos', 'Hyperbole', 'A rhetorical question'],
+        answer: 1,
+        why: 'The speaker builds credibility from experience.',
+      },
+      {
+        q: '"We will rebuild. We will recover. We will return." This is an example of:',
+        options: ['Anaphora and tricolon', 'Juxtaposition', 'A statistic', 'Understatement'],
+        answer: 0,
+        why: 'Three parallel clauses that all begin with "We will".',
+      },
+      {
+        q: 'A PSA shows a single child’s empty shoe on a highway. The main appeal is:',
+        options: ['Logos', 'Ethos', 'Pathos', 'None'],
+        answer: 2,
+        why: 'The image targets grief and fear.',
+      },
+    ],
+    practice: [{ tool: 'drills', label: 'Appeals & devices drill', param: 'rhetoric' }],
+  },
+  {
+    id: '2-2',
+    moduleId: 'm2',
+    number: 2,
+    title: 'Point–Proof–Explanation (PPE) Paragraphs',
+    strands: ['C'],
+    expectations: ['C1', 'C2'],
+    tvo: '1.5',
+    minutes: 30,
+    hook: 'Markers look for three things in every body paragraph: a claim, evidence, and your thinking. PPE guarantees all three.',
+    sections: [
+      {
+        heading: 'The slots',
+        body: [
+          'Point: one arguable claim in a single topic sentence. No "In this paragraph I will...".',
+          'Proof: a quotation, statistic, or specific example, introduced with a signal phrase and cited.',
+          'Explanation: two or three sentences on how the proof supports the point and why it matters.',
+          'Link (PEEL): one sentence connecting back to the thesis or forward to the next idea.',
+        ],
+      },
+      {
+        heading: 'Phrases that help',
+        body: [
+          'Signal phrases: According to..., As the report notes..., Dimaline writes that...',
+          'Analysis starters: This suggests..., This matters because..., In other words..., As a result...',
+          'Link starters: Clearly..., This is why..., Ultimately...',
+        ],
+      },
+      {
+        heading: 'Common mark-losers',
+        body: [
+          'Dropped quotes: a quotation with no introduction.',
+          'Summary instead of analysis: retelling the evidence rather than explaining it.',
+          'A point too broad to prove in one paragraph.',
+          'Evidence with no source.',
+        ],
+      },
+    ],
+    keyTerms: [
+      { term: 'Topic sentence', def: 'The first sentence of a paragraph, stating its main claim.' },
+      { term: 'Evidence', def: 'Facts, quotations, data, or examples that support a claim.' },
+      { term: 'Signal phrase', def: 'A phrase that introduces a quotation and its source: "As Lee argues,..."' },
+      { term: 'Analysis', def: 'Explaining how and why evidence supports a point.' },
+      { term: 'PEEL', def: 'Point, Evidence, Explain, Link: PPE plus a linking sentence.' },
+      { term: 'Dropped quote', def: 'A quotation inserted without any introduction or explanation.' },
+    ],
+    quiz: [
+      {
+        q: 'Which is the strongest Point (topic sentence)?',
+        options: ['In this paragraph I will talk about phones.', 'Phones are a thing in schools.', 'Phone-free classrooms improve focus because they remove constant notifications.', 'Do phones matter?'],
+        answer: 2,
+        why: 'It makes one specific, arguable claim with a reason.',
+      },
+      {
+        q: 'What is a "dropped quote"?',
+        options: ['A quote that is too short', 'A quote with no introduction', 'A quote in a block format', 'A quote from a website'],
+        answer: 1,
+        why: 'Always introduce a quote with a signal phrase.',
+      },
+      {
+        q: 'Which sentence is explanation, not summary?',
+        options: ['The report says 61% of students sleep less than seven hours.', 'This suggests most students begin class already tired, which explains the drop in morning test scores.', 'The report was published in 2025.', 'Many students were surveyed.'],
+        answer: 1,
+        why: 'It interprets the evidence and connects it to the claim.',
+      },
+    ],
+    practice: [{ tool: 'ppe', label: 'Open the PPE Paragraph Builder' }],
+  },
+  {
+    id: '2-3',
+    moduleId: 'm2',
+    number: 3,
+    title: 'Identifying Logical Fallacies',
+    strands: ['B', 'A'],
+    expectations: ['B1', 'A1', 'C1'],
+    minutes: 25,
+    hook: 'A fallacy is an argument that feels convincing but would not survive a second look.',
+    sections: [
+      {
+        heading: 'The common ten',
+        body: [
+          'Ad hominem: attacking the person instead of the argument.',
+          'Straw man: twisting the other side’s argument into a weaker version, then defeating that.',
+          'Slippery slope: claiming one step will lead to a chain of disasters without evidence.',
+          'False dilemma: presenting only two options when more exist.',
+          'Bandwagon: "Everyone is doing it, so it must be right."',
+          'Hasty generalization: a big conclusion from a tiny sample.',
+          'False authority: citing someone who is not an expert on this topic.',
+          'Red herring: changing the subject to distract.',
+          'Circular reasoning: the conclusion is used as the evidence.',
+          'Post hoc: assuming that because B came after A, A caused B.',
+        ],
+      },
+      {
+        heading: 'Why it matters',
+        body: [
+          'Ads, debates, comment sections, and even news headlines use fallacies.',
+          'Spotting them protects you as a reader. Avoiding them earns Thinking marks as a writer.',
+        ],
+      },
+    ],
+    keyTerms: [
+      { term: 'Logical fallacy', def: 'A flaw in reasoning that weakens an argument.' },
+      { term: 'Ad hominem', def: 'Attacking the person rather than the argument.' },
+      { term: 'Straw man', def: 'Misrepresenting an opposing argument to make it easier to attack.' },
+      { term: 'Slippery slope', def: 'Claiming a small step will inevitably lead to extreme consequences.' },
+      { term: 'False dilemma', def: 'Presenting only two choices when others exist.' },
+      { term: 'Bandwagon', def: 'Arguing something is right because it is popular.' },
+      { term: 'Hasty generalization', def: 'Drawing a broad conclusion from too little evidence.' },
+    ],
+    quiz: [
+      {
+        q: '"If we let students use calculators, soon they won’t be able to count, and then they’ll fail every job interview." This is:',
+        options: ['Bandwagon', 'Slippery slope', 'Ad hominem', 'Logos'],
+        answer: 1,
+        why: 'A chain of unproven consequences.',
+      },
+      {
+        q: '"You can’t trust her climate argument. Have you seen her car?" This is:',
+        options: ['Ad hominem', 'Straw man', 'Red herring', 'Circular reasoning'],
+        answer: 0,
+        why: 'It attacks the person, not the argument.',
+      },
+      {
+        q: '"Either you support the new rule or you don’t care about safety." This is:',
+        options: ['Post hoc', 'False dilemma', 'Hasty generalization', 'False authority'],
+        answer: 1,
+        why: 'It hides every option between the two extremes.',
+      },
+    ],
+    practice: [{ tool: 'drills', label: 'Fallacy drill', param: 'fallacies' }],
+  },
+  {
+    id: '2-4',
+    moduleId: 'm2',
+    number: 4,
+    title: 'Structuring an Opinion Piece',
+    strands: ['C'],
+    expectations: ['C1', 'C2', 'C3'],
+    tvo: '1.5',
+    minutes: 30,
+    hook: 'An op-ed has about 600 words to change a stranger’s mind. Structure is how you spend them.',
+    sections: [
+      {
+        heading: 'The shape of an op-ed',
+        body: [
+          'Hook: a short anecdote, a startling fact, or a sharp question.',
+          'Context: what the issue is and why it matters now.',
+          'Thesis: your clear, arguable position in one sentence.',
+          'Body: two or three PPE paragraphs, ordered for impact (strongest point last or first).',
+          'Counter-argument and rebuttal: "Critics argue that... However, ..."',
+          'Conclusion: return to the hook and end with a call to action.',
+        ],
+      },
+      {
+        heading: 'Audience and tone',
+        body: [
+          'A local newspaper reader needs context. A school blog reader already knows the principal’s name.',
+          'Confident is not rude. Concede what is fair on the other side, then show why your position is stronger.',
+          'Cite your evidence (MLA in-text): (Statistics Canada) or (Lee 12).',
+        ],
+      },
+    ],
+    keyTerms: [
+      { term: 'Hook', def: 'An opening line designed to grab attention.' },
+      { term: 'Thesis', def: 'The single sentence stating your main argument.' },
+      { term: 'Counter-argument', def: 'The strongest opposing view, stated fairly.' },
+      { term: 'Rebuttal', def: 'Your response showing why the counter-argument is weaker.' },
+      { term: 'Concession', def: 'Admitting a valid point from the other side before rebutting.' },
+      { term: 'Op-ed', def: 'An opinion article, originally "opposite the editorial page" of a newspaper.' },
+    ],
+    quiz: [
+      {
+        q: 'Where does the counter-argument usually go in an op-ed?',
+        options: ['In the headline', 'After the body paragraphs, before the conclusion', 'In the hook', 'It should be left out'],
+        answer: 1,
+        why: 'Address it once your case is built, then rebut it.',
+      },
+      {
+        q: 'Which is the best thesis?',
+        options: ['Homework is a topic many people discuss.', 'I will discuss homework.', 'Ontario high schools should cap homework at one hour a night to protect sleep and part-time work.', 'Homework?'],
+        answer: 2,
+        why: 'Specific, arguable, and it previews the reasons.',
+      },
+      {
+        q: '"Some argue phones help in emergencies. That is true, but a locker five metres away still allows a call." This sentence is a:',
+        options: ['Hook', 'Concession and rebuttal', 'Call to action', 'Fallacy'],
+        answer: 1,
+        why: 'It grants a point, then answers it.',
+      },
+    ],
+    practice: [
+      { tool: 'ppe', label: 'Build your body paragraphs' },
+      { tool: 'reader', label: 'Deconstruct a model op-ed', param: 'phones' },
+      { tool: 'linter', label: 'Lint your draft' },
+    ],
+  },
+
+  /* ---------------------------- Module 3 ---------------------------- */
+  {
+    id: '3-1',
+    moduleId: 'm3',
+    number: 1,
+    title: 'Active Listening & Note-Taking',
+    strands: ['A'],
+    expectations: ['A1'],
+    tvo: '2.1',
+    minutes: 25,
+    hook: 'You cannot rewind a live speaker. Active listening is a plan for catching what matters the first time.',
+    sections: [
+      {
+        heading: 'Before, during, after',
+        body: [
+          'Before: know your purpose, predict the content from the title, and set up your notes.',
+          'During: listen for signposts ("first", "the key point is", "in contrast", "finally") and jot main ideas, not every word.',
+          'After: summarize the message in two sentences and list any questions.',
+        ],
+      },
+      {
+        heading: 'Note-taking methods',
+        body: [
+          'Cornell notes: a narrow cue column (questions, keywords), a wide notes column, and a summary at the bottom.',
+          'Two-column notes: main idea on the left, supporting details on the right.',
+          'Mind map: the topic in the centre with branches for each point. Good for discussions.',
+          'Shorthand: w/ (with), b/c (because), → (leads to), ↑ (increase), ≠ (not equal).',
+        ],
+      },
+      {
+        heading: 'Listen for more than words',
+        body: [
+          'Tone: urgent, sarcastic, hopeful, neutral, angry. The voice often tells you before the words do.',
+          'Audience: who is the speaker talking to, and how can you tell?',
+          'Bias: whose side is the speaker on? What evidence is missing?',
+        ],
+      },
+    ],
+    keyTerms: [
+      { term: 'Active listening', def: 'Listening with purpose: predicting, noting, questioning, and summarizing.' },
+      { term: 'Signpost', def: 'A word or phrase that signals the structure of a talk ("first", "my last point").' },
+      { term: 'Cornell notes', def: 'A note format with cue, notes, and summary sections.' },
+      { term: 'Tone', def: 'The speaker’s attitude toward the subject or audience.' },
+      { term: 'Paraphrase', def: 'Restating an idea in your own words without changing its meaning.' },
+    ],
+    quiz: [
+      {
+        q: 'Which phrase is a signpost?',
+        options: ['"My second reason is..."', '"Um, so..."', '"Thank you for listening."', '"Good morning."'],
+        answer: 0,
+        why: 'It tells listeners where they are in the structure.',
+      },
+      {
+        q: 'In Cornell notes, what goes in the narrow left column?',
+        options: ['The full transcript', 'Cue questions and keywords', 'Drawings only', 'The date'],
+        answer: 1,
+        why: 'Cues help you review and quiz yourself later.',
+      },
+      {
+        q: 'What should you write down while listening?',
+        options: ['Every word', 'Main ideas and key evidence', 'Only numbers', 'Nothing until the end'],
+        answer: 1,
+        why: 'Capture the structure and the proof; you cannot keep up with every word.',
+      },
+    ],
+    practice: [{ tool: 'listening', label: 'Open the Active Listening Player' }],
+  },
+  {
+    id: '3-2',
+    moduleId: 'm3',
+    number: 2,
+    title: 'Deconstructing Famous Speeches',
+    strands: ['A', 'B'],
+    expectations: ['A1', 'B2'],
+    tvo: '2.3',
+    minutes: 25,
+    hook: 'The speeches people still quote were built on purpose. You can see the scaffolding if you know where to look.',
+    sections: [
+      {
+        heading: 'Deconstruct with SOAPS',
+        body: [
+          'Speaker: who is talking, and what gives them authority?',
+          'Occasion: when and where, and what just happened?',
+          'Audience: who is in the room, and who else is the speaker really addressing?',
+          'Purpose: what does the speaker want the audience to think, feel, or do?',
+          'Subject: what is it about, in one sentence?',
+        ],
+      },
+      {
+        heading: 'Moves from public-domain speeches',
+        body: [
+          'Abraham Lincoln, Gettysburg Address (1863): "government of the people, by the people, for the people". A tricolon in only about 270 words. Brevity can be power.',
+          'Franklin D. Roosevelt, first inaugural address (1933): "the only thing we have to fear is fear itself". Repetition and a twist that reframes the crisis.',
+          'Frederick Douglass, 1852: "What, to the American slave, is your 4th of July?" A rhetorical question that confronts the audience with its own hypocrisy.',
+        ],
+      },
+      {
+        heading: 'Oral traditions',
+        body: [
+          'Many First Nations, Métis, and Inuit traditions carry history, law, and teachings through oral storytelling and speech. Listen for repetition, story, relationship to land and community, and the responsibility of both speaker and listener.',
+        ],
+      },
+    ],
+    keyTerms: [
+      { term: 'SOAPS', def: 'Speaker, Occasion, Audience, Purpose, Subject: a frame for analyzing any speech.' },
+      { term: 'Antithesis', def: 'Contrasting ideas in parallel structure: "not because they are easy, but because they are hard".' },
+      { term: 'Oratory', def: 'The art of formal public speaking.' },
+      { term: 'Occasion', def: 'The time, place, and event that prompted a speech.' },
+      { term: 'Purpose', def: 'What the speaker wants the audience to think, feel, or do.' },
+    ],
+    quiz: [
+      {
+        q: '"of the people, by the people, for the people" is an example of:',
+        options: ['Hyperbole', 'Tricolon', 'Ad hominem', 'Understatement'],
+        answer: 1,
+        why: 'Three parallel phrases.',
+      },
+      {
+        q: 'In SOAPS, "Occasion" means:',
+        options: ['The speaker’s name', 'The event and context that prompted the speech', 'The emotional tone', 'The call to action'],
+        answer: 1,
+        why: 'Occasion explains why this speech, here, now.',
+      },
+      {
+        q: 'Why might a speaker ask the audience a question they do not expect answered aloud?',
+        options: ['To fill time', 'To make the audience think about the answer themselves', 'Because they forgot the answer', 'To end the speech'],
+        answer: 1,
+        why: 'A rhetorical question pulls listeners into the argument.',
+      },
+    ],
+    practice: [{ tool: 'listening', label: 'Analyze a campaign speech', param: 'campaign' }],
+  },
+  {
+    id: '3-3',
+    moduleId: 'm3',
+    number: 3,
+    title: 'Non-Verbal Cues & Vocal Pacing',
+    strands: ['A'],
+    expectations: ['A2'],
+    tvo: '2.2, 2.4',
+    minutes: 20,
+    hook: 'Listeners judge your confidence in the first ten seconds, mostly from how you sound and stand.',
+    sections: [
+      {
+        heading: 'Your vocal toolkit',
+        body: [
+          'Pace: about 130–150 words per minute suits most presentations. Slow down for key lines.',
+          'Pitch and inflection: vary them to avoid a monotone. Let your voice drop at the end of statements.',
+          'Volume: loud enough for the back row (or a steady level for a microphone).',
+          'Emphasis: stress the one word that carries the meaning. "We need action NOW."',
+          'Pauses: pause before and after a key point. Silence makes people listen.',
+          'Fillers (um, uh, like, you know): replace them with a silent pause.',
+        ],
+      },
+      {
+        heading: 'Without words',
+        body: [
+          'Eye contact: with the room, or with the camera lens on a recording.',
+          'Posture: feet planted, shoulders open. No swaying.',
+          'Gestures: match them to the words (count on fingers for three points).',
+          'Facial expression: let it fit the message. A smile during a tragedy story breaks trust.',
+          'For video: camera at eye level, light in front of you, quiet room.',
+        ],
+      },
+    ],
+    keyTerms: [
+      { term: 'Pace', def: 'Speaking speed, often measured in words per minute (WPM).' },
+      { term: 'Inflection', def: 'The rise and fall of pitch in the voice.' },
+      { term: 'Emphasis', def: 'Stressing a word to highlight its importance.' },
+      { term: 'Filler words', def: 'Sounds or words that fill silence: um, uh, like, you know.' },
+      { term: 'Non-verbal communication', def: 'Meaning sent through posture, gestures, facial expression, and eye contact.' },
+    ],
+    quiz: [
+      {
+        q: 'What is a good target pace for a persuasive presentation?',
+        options: ['80–100 WPM', '130–150 WPM', '200–220 WPM', 'As fast as possible'],
+        answer: 1,
+        why: 'Fast enough to keep energy, slow enough to follow.',
+      },
+      {
+        q: 'The best replacement for "um" is:',
+        options: ['"Like"', 'A silent pause', '"You know"', 'Speaking faster'],
+        answer: 1,
+        why: 'A pause sounds confident; a filler sounds unsure.',
+      },
+      {
+        q: 'For a recorded speech, where should the camera be?',
+        options: ['Below your chin', 'At eye level', 'Above your head', 'Behind you'],
+        answer: 1,
+        why: 'Eye level reads as equal and trustworthy.',
+      },
+    ],
+    practice: [{ tool: 'speech', label: 'Open the Speech Studio' }],
+  },
+  {
+    id: '3-4',
+    moduleId: 'm3',
+    number: 4,
+    title: 'Scripting for the Ear vs. the Eye',
+    strands: ['A', 'C'],
+    expectations: ['A2', 'C2'],
+    tvo: '2.3, 2.5',
+    minutes: 25,
+    hook: 'Readers can go back. Listeners cannot. So a speech script breaks some essay rules on purpose.',
+    sections: [
+      {
+        heading: 'Write for the ear',
+        body: [
+          'Short sentences, usually under 20 words.',
+          'Signpost everything: "My first reason...", "Here is the problem...", "So what can we do?"',
+          'Repeat your key message, at least at the start and the end.',
+          'Use concrete stories and images over abstract claims.',
+          'Round numbers: "about one in three" beats "34.2%".',
+          'Contractions are fine. They sound natural.',
+        ],
+      },
+      {
+        heading: 'A 2-minute persuasive pitch',
+        body: [
+          'Hook (about 15 seconds): a story, a startling fact, or a question.',
+          'Thesis (10 seconds): what you want and why.',
+          'Three points with examples (75 seconds).',
+          'Call to action (20 seconds): exactly what the audience should do.',
+          'At 140 WPM, two minutes is about 260–300 words.',
+        ],
+      },
+      {
+        heading: 'Mark up your script',
+        body: ['Use / for a short pause and // for a long one. Underline words to stress. Note breaths in long sentences.'],
+      },
+    ],
+    keyTerms: [
+      { term: 'Signposting', def: 'Telling listeners where they are in your structure.' },
+      { term: 'Script marking', def: 'Notes on a script showing pauses, emphasis, and breaths.' },
+      { term: 'Cadence', def: 'The rhythm and flow of spoken language.' },
+      { term: 'Pitch (business)', def: 'A short persuasive presentation asking the audience to act or buy in.' },
+    ],
+    quiz: [
+      {
+        q: 'Which line is best written for the ear?',
+        options: ['34.2% of respondents indicated dissatisfaction with current scheduling arrangements.', 'About one in three students hate the new schedule.', 'Scheduling arrangements, as many respondents indicated, are unsatisfactory.', 'See Table 2.'],
+        answer: 1,
+        why: 'Short, rounded, concrete.',
+      },
+      {
+        q: 'About how many words fit in a 2-minute speech at 140 WPM?',
+        options: ['100', '280', '500', '900'],
+        answer: 1,
+        why: '140 × 2 = 280.',
+      },
+      {
+        q: 'In a marked script, "//" usually means:',
+        options: ['Speak faster', 'A long pause', 'Skip this line', 'Shout'],
+        answer: 1,
+        why: 'One slash is a short pause; two is a long one.',
+      },
+    ],
+    practice: [{ tool: 'speech', label: 'Script and time a 2-minute pitch' }],
+  },
+
+  /* ---------------------------- Module 4 ---------------------------- */
+  {
+    id: '4-1',
+    moduleId: 'm4',
+    number: 1,
+    title: 'Overt vs. Implied Media Messages',
+    strands: ['D'],
+    expectations: ['D1', 'D2'],
+    minutes: 20,
+    hook: 'An ad for a sports drink is rarely about the drink.',
+    sections: [
+      {
+        heading: 'Two layers',
+        body: [
+          'Overt message: what the text openly says. "Drink SURGE."',
+          'Implied message (subtext): what it suggests without saying. "Drinking SURGE makes you a champion."',
+          'The implied message is usually about identity, belonging, status, fear, or desire.',
+        ],
+      },
+      {
+        heading: 'Key media literacy concepts',
+        body: [
+          'All media are constructions: someone chose every element.',
+          'Audiences negotiate meaning: different people read the same text differently.',
+          'Media have commercial implications: someone usually profits.',
+          'Media contain values and points of view: whose lifestyle is shown as normal?',
+          'Each medium has its own forms and conventions: a PSA, a TikTok, and a billboard work differently.',
+        ],
+      },
+      {
+        heading: 'Questions to ask',
+        body: [
+          'Who made this, and who paid for it?',
+          'Who is the target audience (age, interests, values), and what clues tell you?',
+          'What techniques grab attention?',
+          'What is left out?',
+        ],
+      },
+    ],
+    keyTerms: [
+      { term: 'Overt message', def: 'The stated, obvious message of a media text.' },
+      { term: 'Implied message', def: 'The unstated message a text suggests through images, words, and associations.' },
+      { term: 'Target audience', def: 'The specific group a media text is designed to reach.' },
+      { term: 'Construction', def: 'The idea that every media text is made through deliberate choices.' },
+      { term: 'PSA', def: 'Public service announcement: a non-commercial message meant to change public behaviour.' },
+      { term: 'Demographic', def: 'A group defined by traits such as age, income, or location.' },
+    ],
+    quiz: [
+      {
+        q: 'A car ad shows the car alone on a mountain road at sunrise. The implied message is most likely:',
+        options: ['The car has four doors', 'Owning this car means freedom and adventure', 'Mountains are dangerous', 'Sunrise is at 6 a.m.'],
+        answer: 1,
+        why: 'The setting sells a feeling, not a feature.',
+      },
+      {
+        q: '"All media are constructions" means:',
+        options: ['Media are about buildings', 'Every element was chosen by someone', 'Media are always false', 'Only ads are made'],
+        answer: 1,
+        why: 'Even news photos involve choices: framing, timing, cropping.',
+      },
+      {
+        q: 'Which clue best identifies a target audience?',
+        options: ['The font colour alone', 'The ages, activities, and language of the people shown', 'The paper size', 'The date'],
+        answer: 1,
+        why: 'Ads show people the audience wants to be.',
+      },
+    ],
+    practice: [{ tool: 'hotspot', label: 'Analyze the SURGE ad', param: 'surge' }],
+  },
+  {
+    id: '4-2',
+    moduleId: 'm4',
+    number: 2,
+    title: 'Visual Framing, Angles & Lighting',
+    strands: ['D'],
+    expectations: ['D2'],
+    tvo: '3.3',
+    minutes: 25,
+    hook: 'The same person can look heroic or helpless depending on where the camera stands.',
+    sections: [
+      {
+        heading: 'Camera angles',
+        body: [
+          'Low angle (camera looks up): the subject seems powerful or threatening.',
+          'High angle (camera looks down): the subject seems small, weak, or vulnerable.',
+          'Eye level: equal and relatable. Common in news and testimonials.',
+          'Bird’s-eye (straight down): overview, pattern, or insignificance.',
+          'Dutch tilt (camera tilted): unease or disorder.',
+        ],
+      },
+      {
+        heading: 'Shot size and composition',
+        body: [
+          'Establishing or wide shot: shows the setting. Medium shot: waist up. Close-up: face or object, for emotion or detail.',
+          'Rule of thirds: key elements sit on the lines or crossing points of a 3×3 grid.',
+          'Leading lines: roads, rails, or arms that pull the eye to the focal point.',
+          'Negative space: empty area that isolates the subject or creates calm.',
+        ],
+      },
+      {
+        heading: 'Colour and lighting',
+        body: [
+          'Warm colours (red, orange, yellow): energy, passion, urgency, comfort.',
+          'Cool colours (blue, green, purple): calm, sadness, trust, technology.',
+          'High-key lighting: bright and even, so the mood is upbeat (ads, sitcoms).',
+          'Low-key lighting: deep shadows, so the mood is dramatic or serious (thrillers, PSAs).',
+          'Backlighting: a silhouette, so the subject reads as mysterious or iconic.',
+        ],
+      },
+    ],
+    keyTerms: [
+      { term: 'Low angle', def: 'A shot taken from below the subject, making it look powerful.' },
+      { term: 'High angle', def: 'A shot taken from above the subject, making it look vulnerable.' },
+      { term: 'Rule of thirds', def: 'Placing key elements along a 3×3 grid for balance and interest.' },
+      { term: 'Leading lines', def: 'Lines in an image that guide the viewer’s eye.' },
+      { term: 'Negative space', def: 'Empty space around a subject.' },
+      { term: 'Low-key lighting', def: 'High-contrast lighting with strong shadows for a dramatic mood.' },
+      { term: 'Close-up', def: 'A tightly framed shot of a face or object.' },
+    ],
+    quiz: [
+      {
+        q: 'A politician is photographed from below against the sky. The effect is:',
+        options: ['They seem vulnerable', 'They seem powerful', 'They seem far away', 'No effect'],
+        answer: 1,
+        why: 'Low angles make subjects loom.',
+      },
+      {
+        q: 'Dark shadows and a single spotlight are called:',
+        options: ['High-key lighting', 'Low-key lighting', 'Natural lighting', 'Flat lighting'],
+        answer: 1,
+        why: 'Low-key lighting creates drama.',
+      },
+      {
+        q: 'A road that runs from the corner of a photo toward the subject is an example of:',
+        options: ['Negative space', 'Leading lines', 'Dutch tilt', 'A close-up'],
+        answer: 1,
+        why: 'It pulls the eye along a path.',
+      },
+    ],
+    practice: [
+      { tool: 'hotspot', label: 'Analyze the "One Text" PSA', param: 'psa' },
+      { tool: 'hotspot', label: 'Analyze an influencer post', param: 'glow' },
+    ],
+  },
+  {
+    id: '4-3',
+    moduleId: 'm4',
+    number: 3,
+    title: 'Digital Algorithms & Lateral Reading',
+    strands: ['D', 'B'],
+    expectations: ['D1', 'B1'],
+    tvo: '3.1, 3.2',
+    minutes: 25,
+    hook: 'Your feed is not a window onto the world. It is a mirror built from what you watched yesterday.',
+    sections: [
+      {
+        heading: 'How feeds decide',
+        body: [
+          'Algorithms rank posts by predicted engagement: watch time, likes, comments, shares.',
+          'Content that triggers strong emotion, especially outrage, tends to spread fastest.',
+          'Filter bubble: you mostly see what you already agree with. Echo chamber: everyone around you repeats it.',
+        ],
+      },
+      {
+        heading: 'Your digital self',
+        body: [
+          'Online identity is curated: people post highlights, not the whole story.',
+          'Your digital footprint (posts, tags, comments, likes) is searchable and hard to erase. Employers and colleges look.',
+          'Review privacy settings, think before tagging others, and ask "Would I be fine with this on a billboard?"',
+        ],
+      },
+      {
+        heading: 'Read laterally (SIFT)',
+        body: [
+          'Stop: notice your emotional reaction before you share.',
+          'Investigate the source: open a new tab and search who runs the site or account.',
+          'Find better coverage: what do trusted news outlets or fact-checkers say?',
+          'Trace claims to the original: find the actual study, quote, or video in full context.',
+          'Professional fact-checkers spend little time on the page itself; they leave it to learn about it.',
+        ],
+      },
+    ],
+    keyTerms: [
+      { term: 'Algorithm', def: 'A set of rules a platform uses to decide what content to show you.' },
+      { term: 'Filter bubble', def: 'A personalized feed that shows mostly what you already like or agree with.' },
+      { term: 'Digital footprint', def: 'The trail of data you leave online.' },
+      { term: 'Lateral reading', def: 'Checking a source by leaving it and searching what other sources say about it.' },
+      { term: 'SIFT', def: 'Stop, Investigate the source, Find better coverage, Trace claims to the original.' },
+      { term: 'Reverse image search', def: 'Searching with an image to find where else it appears and where it came from.' },
+    ],
+    quiz: [
+      {
+        q: 'A slick website cites "studies" but has no "About" page. Your best next move is:',
+        options: ['Trust it because it looks professional', 'Open a new tab and search the site’s name and owner', 'Share it to ask friends', 'Read every page on the site'],
+        answer: 1,
+        why: 'Lateral reading: learn about the source from outside it.',
+      },
+      {
+        q: 'Why does outrage content spread quickly?',
+        options: ['It is always true', 'Algorithms reward high engagement', 'It is shorter', 'It has better lighting'],
+        answer: 1,
+        why: 'Angry viewers comment and share, and algorithms boost what gets engagement.',
+      },
+      {
+        q: 'A dramatic photo claims to show yesterday’s flood. How can you check it fast?',
+        options: ['Zoom in', 'Reverse image search', 'Count the likes', 'Read the comments'],
+        answer: 1,
+        why: 'It shows whether the image appeared earlier somewhere else.',
+      },
+    ],
+    practice: [{ tool: 'drills', label: 'Lateral reading scenarios', param: 'lateral' }],
+  },
+  {
+    id: '4-4',
+    moduleId: 'm4',
+    number: 4,
+    title: 'Building a Photo Essay',
+    strands: ['D', 'C'],
+    expectations: ['D3', 'C2'],
+    tvo: '3.4',
+    minutes: 35,
+    hook: 'Five photos and five sentences can make an argument as strong as an essay.',
+    sections: [
+      {
+        heading: 'Plan before you shoot',
+        body: [
+          'Write a one-sentence theme statement: "The bus loop at 7 a.m. is where our school wakes up."',
+          'Make a shot list: an establishing shot, a portrait, a detail close-up, an action shot, and a closing image.',
+          'Vary angles and shot sizes so the sequence has rhythm.',
+          'Order for story: beginning, change or tension, resolution.',
+        ],
+      },
+      {
+        heading: 'Caption rules',
+        body: [
+          'One or two sentences, active verbs.',
+          'Add what the photo cannot show: a name, a time, a reason, a number.',
+          'Do not describe the obvious. Cut "This is a picture of...".',
+          'Keep the tense consistent across captions (present tense feels immediate).',
+        ],
+      },
+      {
+        heading: 'Ethics',
+        body: ['Ask permission before photographing people, especially for portraits. If you staged a shot, say so.'],
+      },
+    ],
+    keyTerms: [
+      { term: 'Photo essay', def: 'A sequence of photographs and captions that tells a story or makes an argument.' },
+      { term: 'Establishing shot', def: 'A wide opening image that shows where the story takes place.' },
+      { term: 'Shot list', def: 'A planned list of the images you need.' },
+      { term: 'Sequence', def: 'The order of images, which creates the story’s flow.' },
+      { term: 'Caption', def: 'Short text that adds context the image cannot show.' },
+      { term: 'Consent', def: 'Permission from a person before photographing or publishing them.' },
+    ],
+    quiz: [
+      {
+        q: 'Which caption is strongest?',
+        options: ['This is a picture of a bus.', 'A bus.', 'Driver Ana Ruiz starts Route 12 at 6:40 a.m., forty minutes before the first bell.', 'Here we see a bus that is driving.'],
+        answer: 2,
+        why: 'Names, time, and context the photo cannot show.',
+      },
+      {
+        q: 'What should usually come first in a photo essay?',
+        options: ['An extreme close-up', 'An establishing shot', 'The conclusion', 'A logo'],
+        answer: 1,
+        why: 'Orient viewers before zooming in.',
+      },
+      {
+        q: 'Why vary shot sizes and angles?',
+        options: ['To fill space', 'To create rhythm and keep viewers engaged', 'Because the rubric says so', 'To hide mistakes'],
+        answer: 1,
+        why: 'Repetition flattens a story; variety moves it.',
+      },
+    ],
+    practice: [{ tool: 'photo', label: 'Open the Photo Essay Storyboard' }],
+  },
+
+  /* ---------------------------- Module 5 ---------------------------- */
+  {
+    id: '5-1',
+    moduleId: 'm5',
+    number: 1,
+    title: 'Narrative Structure, Theme & Character Voice',
+    strands: ['B'],
+    expectations: ['B1', 'B2'],
+    tvo: '1.1, 1.2',
+    minutes: 30,
+    hook: 'Every story you have ever loved runs on the same engine: someone wants something and something stands in the way.',
+    sections: [
+      {
+        heading: 'The plot arc',
+        body: [
+          'Exposition: characters, setting, the normal world.',
+          'Inciting incident: the event that starts the conflict.',
+          'Rising action: complications that raise the stakes.',
+          'Climax: the turning point, the moment of highest tension.',
+          'Falling action and resolution: consequences, then a new normal.',
+          'Conflict types: person vs. person, self, society, nature, or technology.',
+        ],
+      },
+      {
+        heading: 'Point of view and voice',
+        body: [
+          'First person ("I"): intimate but limited, and possibly unreliable.',
+          'Third person limited: "she" or "he", inside one character’s head.',
+          'Third person omniscient: the narrator knows everyone’s thoughts.',
+          'Voice is a character’s sound: word choice, sentence length, dialect, humour, and what they notice.',
+          'Ask whose point of view is shared, and whose is missing.',
+        ],
+      },
+      {
+        heading: 'Theme',
+        body: [
+          'A theme is a message about life, written as a full sentence. "Belonging" is a topic; "People find belonging by protecting each other" is a theme.',
+          'Support a theme with evidence from character choices, symbols, and the ending.',
+          'Common course texts include The Marrow Thieves (Dimaline), Indian Horse (Wagamese), Of Mice and Men (Steinbeck), and Animal Farm (Orwell).',
+        ],
+      },
+    ],
+    keyTerms: [
+      { term: 'Exposition', def: 'The opening of a story that introduces characters and setting.' },
+      { term: 'Climax', def: 'The turning point of highest tension.' },
+      { term: 'Conflict', def: 'The central struggle that drives the plot.' },
+      { term: 'First-person narration', def: 'Told by a character using "I".' },
+      { term: 'Third-person limited', def: 'Told by an outside narrator who knows one character’s thoughts.' },
+      { term: 'Theme', def: 'The central message about life, expressed as a complete statement.' },
+      { term: 'Foreshadowing', def: 'Hints about what will happen later.' },
+      { term: 'Unreliable narrator', def: 'A narrator whose account cannot be fully trusted.' },
+    ],
+    quiz: [
+      {
+        q: 'Which is a theme statement (not just a topic)?',
+        options: ['Family', 'Courage', 'Courage often means admitting what you are afraid of.', 'The ending'],
+        answer: 2,
+        why: 'A theme is a complete idea about life.',
+      },
+      {
+        q: 'A story told with "I" by a character who lies to herself has:',
+        options: ['An omniscient narrator', 'An unreliable first-person narrator', 'No point of view', 'A second-person narrator'],
+        answer: 1,
+        why: 'We see only her version, and it is skewed.',
+      },
+      {
+        q: 'The moment of highest tension and the turning point is the:',
+        options: ['Exposition', 'Rising action', 'Climax', 'Resolution'],
+        answer: 2,
+        why: 'Everything after the climax is consequence.',
+      },
+    ],
+    practice: [{ tool: 'drills', label: 'Narrative short-story drill', param: 'narrative' }],
+  },
+  {
+    id: '5-2',
+    moduleId: 'm5',
+    number: 2,
+    title: 'Block vs. Point-by-Point Essay Outlining',
+    strands: ['C'],
+    expectations: ['C1'],
+    tvo: '4.1',
+    minutes: 30,
+    hook: 'A compare-and-contrast essay is only as good as its criteria. Choose them before you write a word.',
+    sections: [
+      {
+        heading: 'Plan the comparison',
+        body: [
+          'Compare means show similarities. Contrast means show differences. Most essays do both.',
+          'Choose two or three criteria (points of comparison): setting, how each character handles conflict, use of symbolism, target audience, and so on.',
+          'Write a comparative thesis that states the relationship and what it reveals: "Although both protagonists search for a safe place to belong, Frenchie finds family among fellow travellers while George ends up alone, which suggests..."',
+        ],
+      },
+      {
+        heading: 'Two structures',
+        body: [
+          'Block method: everything about Subject A, then everything about Subject B. Simpler to write, but readers must remember A while reading B. Best for short essays.',
+          'Point-by-point method: each body paragraph covers one criterion for both A and B. Keeps the comparison tight. Best for detailed analysis.',
+          'Either way, the conclusion explains what the comparison reveals, not just that the subjects differ.',
+        ],
+      },
+      {
+        heading: 'Comparison transitions',
+        body: ['Similarity: similarly, likewise, both, in the same way. Difference: in contrast, however, whereas, on the other hand, unlike.'],
+      },
+    ],
+    keyTerms: [
+      { term: 'Criteria', def: 'The specific points on which two subjects are compared.' },
+      { term: 'Block method', def: 'Discussing one subject fully, then the other.' },
+      { term: 'Point-by-point method', def: 'Alternating between subjects for each criterion.' },
+      { term: 'Comparative thesis', def: 'A thesis stating how two subjects relate and why it matters.' },
+      { term: 'Transition', def: 'A word or phrase that links ideas and shows their relationship.' },
+    ],
+    quiz: [
+      {
+        q: 'In point-by-point structure, each body paragraph covers:',
+        options: ['One subject only', 'One criterion for both subjects', 'The thesis', 'Only quotations'],
+        answer: 1,
+        why: 'A and B side by side on one criterion.',
+      },
+      {
+        q: 'Which transition signals contrast?',
+        options: ['Similarly', 'Likewise', 'Whereas', 'In addition'],
+        answer: 2,
+        why: '"Whereas" sets two things against each other.',
+      },
+      {
+        q: 'The block method risks:',
+        options: ['Being too detailed', 'Readers forgetting Subject A while reading B', 'Having no thesis', 'Too many transitions'],
+        answer: 1,
+        why: 'Use explicit callbacks in the B section to fix it.',
+      },
+    ],
+    practice: [{ tool: 'compare', label: 'Open the Compare & Contrast Matrix' }],
+  },
+  {
+    id: '5-3',
+    moduleId: 'm5',
+    number: 3,
+    title: 'Integrating Quotes & MLA/APA Citations',
+    strands: ['C'],
+    expectations: ['C1', 'C3'],
+    minutes: 25,
+    hook: 'A quote dropped into a paragraph is decoration. A quote integrated and cited is evidence.',
+    sections: [
+      {
+        heading: 'The quote sandwich',
+        body: [
+          'Top slice: a signal phrase that sets up who is speaking and the context.',
+          'Filling: the quotation, trimmed to the words you need.',
+          'Bottom slice: your analysis of what it shows.',
+          'Blend short quotes into your own sentence: The narrator admits she "had never felt so far from home" (Okafor 45). (Okafor is a made-up author for this example.)',
+          'Use an ellipsis (...) for removed words and [square brackets] for changes you make.',
+        ],
+      },
+      {
+        heading: 'MLA 9 (most common in Ontario English)',
+        body: [
+          'In-text: (Author page), e.g. (Dimaline 45). No comma, no "p.".',
+          'Works Cited, book: Dimaline, Cherie. The Marrow Thieves. Cormorant Books, 2017.',
+          'Works Cited, web: Author. "Title of Page." Site Name, Day Month Year, URL.',
+          'Quotations longer than four lines become indented block quotes with no quotation marks.',
+        ],
+      },
+      {
+        heading: 'APA 7 (common in college programs)',
+        body: [
+          'In-text: (Author, Year, p. #), e.g. (Dimaline, 2017, p. 45).',
+          'References, book: Dimaline, C. (2017). The marrow thieves. Cormorant Books.',
+          'Paraphrases still need a citation. Copying ideas without credit is plagiarism.',
+        ],
+      },
+    ],
+    keyTerms: [
+      { term: 'In-text citation', def: 'A short reference in your sentence pointing to the full source entry.' },
+      { term: 'Works Cited', def: 'The MLA list of sources at the end of an essay.' },
+      { term: 'References', def: 'The APA list of sources at the end of a paper.' },
+      { term: 'Paraphrase', def: 'Putting a source’s idea in your own words. It still needs a citation.' },
+      { term: 'Plagiarism', def: 'Presenting someone else’s words or ideas as your own.' },
+      { term: 'Ellipsis', def: 'Three dots (...) showing words removed from a quotation.' },
+    ],
+    quiz: [
+      {
+        q: 'Which MLA in-text citation is correct?',
+        options: ['(Dimaline, p. 45)', '(Dimaline 45)', '(45 Dimaline)', '(Dimaline, 2017, p. 45)'],
+        answer: 1,
+        why: 'MLA uses author and page, no comma, no "p.". Option D is APA.',
+      },
+      {
+        q: 'Square brackets in a quotation show:',
+        options: ['Words you removed', 'Words you changed or added', 'The page number', 'The author'],
+        answer: 1,
+        why: 'An ellipsis removes; brackets change.',
+      },
+      {
+        q: 'Do paraphrases need citations?',
+        options: ['No, they are in your own words', 'Yes, the idea still belongs to the source', 'Only in APA', 'Only for websites'],
+        answer: 1,
+        why: 'Credit the idea, not just the wording.',
+      },
+    ],
+    practice: [
+      { tool: 'drills', label: 'Citation drill', param: 'citations' },
+      { tool: 'ppe', label: 'Practise integrating quotes in PPE' },
+    ],
+  },
+  {
+    id: '5-4',
+    moduleId: 'm5',
+    number: 4,
+    title: 'Mock Final Exam Simulator',
+    strands: ['B', 'C', 'D', 'A'],
+    expectations: ['B1', 'B2', 'C1', 'C3', 'D1'],
+    tvo: '4.2',
+    minutes: 120,
+    hook: 'The final exam rewards a plan more than raw talent. Practise the plan under the clock.',
+    sections: [
+      {
+        heading: 'What to expect',
+        body: [
+          'Sight passages (fiction and non-fiction) with multiple-choice and short-answer questions.',
+          'A media or graphic text to analyze.',
+          'Language conventions questions (splices, fragments, agreement, apostrophes).',
+          'A writing task: a persuasive or compare-and-contrast essay.',
+        ],
+      },
+      {
+        heading: 'A 2-hour time plan',
+        body: [
+          '0:00–0:10: preview the whole exam, then plan your essay first while you are fresh.',
+          '0:10–0:55: reading, media, and conventions sections.',
+          '0:55–1:45: essay. Spend 10 minutes outlining, 35 writing, and 5 editing.',
+          '1:45–2:00: review flagged questions and proofread.',
+        ],
+      },
+      {
+        heading: 'Short-answer formula',
+        body: ['Answer the question in your first sentence, give one piece of evidence from the passage, then explain it. PPE again, in three sentences.'],
+      },
+    ],
+    keyTerms: [
+      { term: 'Sight passage', def: 'A text you have not seen before, read during the exam.' },
+      { term: 'Short answer', def: 'A brief written response, usually 3–5 sentences, using evidence.' },
+      { term: 'Outline', def: 'A quick plan of thesis and paragraph points before writing.' },
+    ],
+    quiz: [
+      {
+        q: 'What is the best first move when the exam starts?',
+        options: ['Start the essay immediately', 'Preview the whole exam and plan your time', 'Answer the hardest question first', 'Reread the instructions five times'],
+        answer: 1,
+        why: 'A two-minute preview prevents running out of time on the section worth the most.',
+      },
+      {
+        q: 'A strong short answer starts with:',
+        options: ['A quotation', 'A direct answer to the question', '"In this answer I will..."', 'A definition of the question'],
+        answer: 1,
+        why: 'Lead with the answer, then prove it.',
+      },
+      {
+        q: 'How much of a 50-minute essay block should go to planning?',
+        options: ['None', 'About 10 minutes', '30 minutes', 'All of it'],
+        answer: 1,
+        why: 'A clear outline makes the writing faster and better organized.',
+      },
+    ],
+    practice: [{ tool: 'exam', label: 'Start the Mock Final Exam' }],
+  },
+];
+
+export const LESSON_BY_ID: Record<string, Lesson> = Object.fromEntries(LESSONS.map((l) => [l.id, l]));
+
+export function lessonOrder(): string[] {
+  return LESSONS.map((l) => l.id);
+}
